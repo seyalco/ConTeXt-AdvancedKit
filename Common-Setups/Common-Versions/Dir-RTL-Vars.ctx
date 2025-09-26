@@ -1,0 +1,5 @@
+% Set direction variables for right-to-left envs.
+
+%Setups.ctx
+%%Itemize
+\setvariable{dir-vars}{itemize}{reverse}

@@ -1,0 +1,210 @@
+% ==================================================
+% Note:
+% This cover template is designed as a flexible typesetting 
+% framework intended for demonstration and creative 
+% customization. You can easily add, remove, or modify 
+% any element without relying on plain TeX commands, 
+% giving you full control over the layout, positioning, 
+% and styling to match your specific needs.
+% ==================================================
+
+%--------------------------------------------------
+% 1. TEXT STYLES (font, weight, spacing)
+%--------------------------------------------------
+\define\InstitutionStyle{\tfb}
+\define\MajorHeadingStyle{\tfa}
+\define\MinorHeadingStyle{\tf}
+\define\TitleStyle{\tfc\bf\spaceskip=0.4em}
+\define\AuthorLabelStyle{\tf}
+\define\AuthorNameStyle{\tf}
+\define\DateStyle{\tf}                                                      
+
+% ===========================================================
+% 2. Cover Position Variables
+%
+% X/Y values define the page coordinates (anchor point) for 
+% placing each element.
+%
+% • By default, the anchor point is relative to the **top-left**
+%   corner of the page.
+%
+% • <VariableName>L controls which point of the element/frame will
+%   be aligned with the specified X/Y coordinates:
+%     - Example: titleX and titleY → alignment param is titleL
+%     - left   → left edge of the frame is placed exactly at (X,Y)
+%     - middle → horizontal center of the frame is placed at (X,Y)
+%     - right  → right edge of the frame is placed at (X,Y)
+%     - Combined values (e.g. middleleft, middleright, topleft)
+%       allow both horizontal and vertical anchor control.
+%
+% • When moving an element, adjust its <VariableName>L to keep
+%   alignment correct relative to your chosen anchor point.
+%   Example: If you move an element to the page center, set its
+%   anchor point to "middle" so that symmetry is preserved.
+% ===========================================================
+
+\setvariables
+  [coverpos]
+  [institutionX=0.07\paperwidth,
+   institutionY=0.1\paperheight,
+   institutionL=right,
+   headingsX=0.07\paperwidth,
+   headingsY=0.2\paperheight,
+   headingsL=right,
+   titleX=0.5\paperwidth,
+   titleY=0.5\paperheight,
+   titleL=middle,
+   authorX=0.5\paperwidth,
+   authorY=0.75\paperheight,
+   authorL=middle,
+   dateX=0.9\paperwidth,
+   dateY=0.9\paperheight,
+   dateL=left,
+   ]
+
+
+%--------------------------------------------------
+% 4. COVER PAGE CONTENT
+%--------------------------------------------------
+
+% ===========================================================
+% LAYER: title page background
+% ===========================================================
+\startreusableMPgraphic{titlebackground}
+    filldraw fullsquare
+        xscaled PaperWidth
+        yscaled PaperHeight
+        withcolor \MPcolor{ColTitleBackground};
+\stopreusableMPgraphic
+
+\definelayer
+  [TitleBack]
+  [width=\paperwidth,
+   height=\paperheight,
+   ]
+
+\setlayer[TitleBack]{\reusableMPgraphic{titlebackground}}
+
+% ===========================================================
+% LAYER: Institution name / university name
+% ===========================================================
+\definelayer
+  [InstitutionLayer]
+  [x=\getvariable{coverpos}{institutionX},
+   y=\getvariable{coverpos}{institutionY}]
+
+% Set what this layer will contain
+\setlayer[InstitutionLayer][location=\getvariable{coverpos}{institutionL}]
+  {\InstitutionStyle \getvariable{title}{institution}}
+
+% ===========================================================
+% LAYER: Major & Minor headings
+% ===========================================================
+\definelayer
+  [HeadingsLayer]
+  [x=\getvariable{coverpos}{headingsX},
+   y=\getvariable{coverpos}{headingsY}]
+
+\setlayer
+  [HeadingsLayer]
+  [location=\getvariable{coverpos}{headingsL}]
+  {\MajorHeadingStyle\getvariable{title}{majorheading}}
+
+\setlayer
+  [HeadingsLayer]
+  [location=\getvariable{coverpos}{headingsL},
+   y={\getvariable{coverpos}{headingsY} + 0.03\paperheight}]
+  {\MinorHeadingStyle\getvariable{title}{minorheading}}
+
+% ===========================================================
+% LAYER: Main title inside frame
+% ===========================================================
+
+\startreusableMPgraphic{TitleGradient}
+  draw lmt_shade [
+    path = fullsquare 
+           xscaled OverlayWidth 
+           yscaled OverlayHeight,
+    direction = "right",
+    alternative = "linear",
+    colors = { "TitleStart", "TitleEnd" }
+  ] ;
+\stopreusableMPgraphic
+
+\defineoverlay[TitleGradient][\reuseMPgraphic{TitleGradient}]
+
+\defineframed[CoverTitleFrame]
+  [frame=off,
+   width=\paperwidth,
+   height=0.1\paperheight,
+   background=TitleGradient]
+
+\definelayer
+  [TitleLayer]
+  [x=\getvariable{coverpos}{titleX},
+   y=\getvariable{coverpos}{titleY}]
+
+\setlayer
+  [TitleLayer]
+  [location=\getvariable{coverpos}{titleL}]
+    {
+      \CoverTitleFrame{
+        \color[TitleText]{\TitleStyle{\getvariable{title}{title}}}
+      }
+    }
+
+% ===========================================================
+% LAYER: Author name (left) and Link (right)
+% ===========================================================
+\definelayer
+  [AuthorLayer]
+  [x=\getvariable{coverpos}{authorX},
+   y=\getvariable{coverpos}{authorY},
+   ]
+
+\setlayer[AuthorLayer][location=\getvariable{coverpos}{authorL}]
+  {\startcolumns[n=2,distance=0.5\makeupwidth,balance=no]
+     % Left column: Author label + name
+     \setupalign[left]
+     {\AuthorLabelStyle Author} \par
+     {\AuthorNameStyle \getvariable{title}{author}}
+
+     % Right column: Link label + value
+     \column
+     \setupalign[right]
+     {\AuthorLabelStyle Link} \par
+     {\AuthorNameStyle \getvariable{title}{link}}
+   \stopcolumns}
+
+% ===========================================================
+% LAYER: Date
+% ===========================================================
+\definelayer
+  [DateLayer]
+  [x=\getvariable{coverpos}{dateX},
+   y=\getvariable{coverpos}{dateY},
+   ]
+
+\setlayer[DateLayer][location=\getvariable{coverpos}{dateL}]
+  {\DateStyle \getvariable{title}{date}}
+
+% ===========================================================
+% 5. Final Cover Page
+% Combine all layers into a single background
+% ===========================================================
+
+\begingroup % local group
+\setupbackgrounds
+  [page]
+  [background={TitleBack,
+               InstitutionLayer,
+               HeadingsLayer,
+               TitleLayer,
+               AuthorLayer,
+               DateLayer,
+   }]
+\startstandardmakeup
+  % No need for extra content here,
+  % layers are rendered as background
+\stopstandardmakeup
+\endgroup

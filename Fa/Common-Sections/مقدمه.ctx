@@ -1,0 +1,24 @@
+% preface.ctx - placeholder
+
+\fancysubject{Preface 📖🚀}
+
+Hello dear friend! 👋
+
+This is a short sample preface for testing the \ConTeXt\ 📦 template.  
+In this project, we use emoji fonts like 😀😍🌍 to make the text more fun and visually engaging.  
+We hope this \Important{template} will be an enjoyable ✨ and inspiring 💡 experience for you.
+
+Wishing you success 🌟  
+The Development Team ❤️
+
+\startitemgroup[Horizontal]
+\item Build 
+\item Explore 
+\item Create 
+\item Inspire 
+\item Learn 
+\item Share 
+\item Smile 
+\item Grow 
+\stopitemgroup
+

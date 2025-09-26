@@ -1,0 +1,101 @@
+% =========================================
+% File: Setups.ctx
+% Purpose: General template settings
+% =========================================
+
+% ---------- General Settings ------------
+\setuppapersize[\getvariable{paper}{size}]
+\setupinteraction[state=start]
+
+
+% ---------- Paragraph & Line Spacing ----
+\setupwhitespace[halfline]        % Paragraph spacing
+\setupinterlinespace[line=3.4ex]  % Line spacing
+\setuptolerance[tolerant]
+
+
+% ---------- Defined Highlights ----------
+\definehighlight[Important] [style=FontImportant, color=ColImportant]
+
+% ---------- fancy subject ----------
+
+\definehead
+  [fancysubject] 
+  [subject]      
+
+\setuphead
+  [fancysubject]  
+  [
+    align=center,  
+    style=\bfc,    
+    before={\blank[big]},  
+    after={\blank[2*big]},
+  ]
+
+% ---------- Hashtag ----------
+\def\Hashtag#1{%
+  \color[ColHashtag]{% Apply the specified color
+    \hbox{% Prevent line breaking
+      \ctxlua{%
+        -- Process the input string
+        local original_text = "#1"  -- Original string
+        local formatted_text = string.gsub(original_text, " ", "_")  -- Replace spaces with underscores
+        
+        -- Create a clickable link for PDF search
+        -- The link points to a destination like "search:original_string" for easy searching
+        local display_text = "\\letterhash " .. formatted_text  -- Display text with hash symbol
+        context.goto(display_text, { destination = "search:" .. formatted_text })  -- Output as clickable link
+      }%
+    }%
+  }%
+}
+
+% Usage example: \Hashtag{your text}
+% This will output: #your_text (clickable, colored, non-breaking, and searchable in PDF)
+
+
+% ---------- Horizontal Item List --------
+\defineconversion[custom-horizontal-item]
+  [
+    \getvariable{custom-horizontal-item}{n1},
+    \getvariable{custom-horizontal-item}{n2},
+    {\symbol[U_Faces:smile_square]},
+    {\symbol[Fruits:grape]}
+  ]
+
+\defineitemgroup[Horizontal]
+
+\setupitemgroup
+  [Horizontal] [each]
+  [
+    custom-horizontal-item,
+    packed,
+    columns,
+    \getvariable{itemize-horizontal}{number-columns}
+  ]
+  [
+    color=ColItemizeHorizontal,
+    command=\Important,
+    direction={\getvariable{dir-vars}{itemize}},
+    stopper=,
+    leftmargin=5mm
+  ]
+
+
+% ---------- Dual-Poem Environment -----
+\defineitemgroup[Mypoem]
+\setupitemgroup[Mypoem][1] % Setup for the first level of the itemization
+  [
+    horizontal,
+    \getvariable{poem}{number-columns}, %One, Two or Even numbers
+  ]
+  [
+    symbol=,
+    before={\blank[medium]},
+    after={\blank[medium]},
+  ]
+  
+  
+% =========================================
+% END OF FILE
+% =========================================

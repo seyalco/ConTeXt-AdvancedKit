@@ -1,0 +1,31 @@
+% This file creates aliases for commands defined in 'Setups.ctx'.
+% Use this to define custom or language-specific names for your macros.
+%
+% GUIDELINES:
+%
+% 1. For simple one-to-one aliases, use \let.
+%    The new command will behave exactly like the original.
+%
+%    Example:
+%    \let\MyAlias\OriginalCommand
+%
+% 2. For complex wrappers (e.g., for \start...\stop environments) that
+%    pre-set arguments or add formatting, use \protected\def.
+%
+%    Example:
+%    \protected\def\startMyQuote#1\stopMyQuote%
+%       {\starttextbackground[frame] #1 \stoptextbackground \blank[big]}
+%
+
+% --- Your Aliases ---
+
+%%1. Simples:
+\let\هشتگ\Hashtag
+
+
+%%2. Complexes:
+\protected\def\شروع‌شعر#1\پایان‌شعر
+   {\startcolor[colBarjasteh]\startitemgroup[Mypoem]#1\stopitemgroup\stopcolor}
+   
+\protected\def\مصراع#1
+   {\startitem #1\stopitem}

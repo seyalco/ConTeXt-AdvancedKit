@@ -1,0 +1,77 @@
+% =========================================================
+% FontFeatures.ctx
+%
+% This file defines reusable sets of OpenType font features.
+% These feature sets can be applied to fonts throughout the project
+% to ensure consistency and keep the main document clean.
+%
+% Usage:
+%   \definefont[MyFont][fontname*feature-name at 12pt]
+%   Example: \definefont[MainText][FarsiFont*Farsi at 12pt]
+%
+% ---------------------------------------------------------
+% Inspecting Font Features:
+%
+% You can explore available parameters, OpenType features, 
+% grouped by type, and design axes of any font with:
+%
+%   \usemodule[fonts-variable]
+%   \starttext
+%     \showfontvariations[font=file:recursive.ttf]
+%   \stoptext
+%
+% This will generate a PDF document containing:
+%   - All parameters available for the selected font
+%   - All OpenType features (grouped by type: GSUB, GPOS, etc.)
+%   - Design axes (Note: these cannot be directly accessed by the user)
+%   - Predefined instances showing values for each design axis
+%
+% Tip:
+%   Replace "recursive.ttf" with the path/name of your own font file
+%   to see its specific features and available variations.
+%
+% =========================================================
+
+
+% ----------  Font Features ----------
+
+% Proper Emoji rendering:
+\definefontfeature [EmojiUse] [default] % Use default base settings
+  [
+    ccmp=yes,  % Enable glyph composition/decomposition (needed for emojis with skin tones or ZWJ sequences)
+    colr=yes,  % Enable Color Layers (COLR) for color vector-based emojis
+    svg=yes,   % Enable embedded SVG glyph rendering (used in some emoji fonts)
+    sbix=yes   % Enable embedded bitmap glyphs (SBIX) for high-quality bitmap-based emojis
+  ]
+
+% تعریف یک fontfeature استاندارد برای زبان فارسی
+\definefontfeature [Farsi] % پروفایل فونت فارسی
+   [
+     mode=node,         % استفاده از حالت 'node' برای پردازش متن، بهتر برای زبان‌های پیچیده مانند فارسی
+     language=dflt,     % زبان پیش‌فرض؛ انتخاب بدون تغییر اسکریپت تا فونت خودش زبان را تشخیص دهد
+     script=arab,       % اسکریپت عربی (Persian نیز زیرمجموعه همین اسکریپت است)
+     
+     init=yes,          % فعال کردن فرم ابتدایی حروف (Initial forms) 
+     medi=yes,          % فعال کردن فرم میانی حروف (Medial forms) 
+     fina=yes,          % فعال کردن فرم پایانی حروف (Final forms)
+     isol=yes,          % فعال کردن فرم جدا (Isolated forms)؛ ضروری برای حروف تنها
+
+     liga=yes,          % استفاده از Ligatures استاندارد (مثلاً «لا» در فونت‌ها)
+     dlig=yes,          % Ligatures اختیاری و تزئینی (جهت زیبایی بیشتر)
+     rlig=yes,          % Ligatures الزامی تعریف شده در فونت
+     clig=yes,          % Ligatures متنی پیچیده (Contextual ligatures)، مفید برای بهبود اتصال در فونت‌های فارسی
+     tlig=yes,           %  اگر از علامت‌گذاری لاتین یا نیم‌فاصله‌های TeX استفاده کنید، مفید است.
+
+     mark=yes,          % فعال کردن جایگذاری دقیق علائم (مثل اعراب)
+     mkmk=yes,          % جایگذاری دقیق علائم روی علائم دیگر (Mark-to-Mark)؛ برای اعراب ترکیبی و حروف خاص
+
+     kern=yes,          % فعال کردن فاصله‌گذاری جفت‌حروف‌ها (Kerning)
+     curs=yes,           % فعال کردن اتصال حروف در خط عربی و فارسی (Cursive positioning)
+
+     swsh=yes,   % فعال‌کردن حروف تزئینی (Swash)
+     locl=yes    % استفاده از فرم‌های محلی مخصوص فارسی به جای فرم عربی
+   ]
+
+
+   
+   

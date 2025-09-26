@@ -1,0 +1,55 @@
+% ======================================
+% This file contains:
+% 1. Main font definition
+% 2. Additional fonts used throughout the document
+% ======================================
+
+%========== 1. Main Font Definition  ==========%
+% ----- GLOBAL FONT SETTINGS  -----
+\setvariables
+  [fontsetup]
+  [fontfile=m-Parastoo-VariableFont_wght.ttf,
+    scale=1]
+  
+\definefontfeature [light]      [axis={wght=300}]
+\definefontfeature [regular]    [axis={wght=400}]
+\definefontfeature [medium]     [axis={wght=500}]
+\definefontfeature [semibold]   [axis={wght=600}]
+\definefontfeature [bold]       [axis={wght=700}]
+\definefontfeature [extrabold]  [axis={wght=800}]
+
+% ----- TYPEFACE DEFINE  -----
+\starttypescript [serif] [parastoo]
+  \setups[fallbackfonts] % Load fallback definitions
+  
+  \definefontsynonym [SerifLight] [file:\getvariable{fontsetup}{fontfile}] [features={Farsi,light}]
+  \definefontsynonym [SerifRegular] [file:\getvariable{fontsetup}{fontfile}] [features={Farsi,regular}]
+  \definefontsynonym [SerifMedium] [file:\getvariable{fontsetup}{fontfile}] [features={Farsi,medium}]
+  \definefontsynonym [SerifSemiBold] [file:\getvariable{fontsetup}{fontfile}] [features={Farsi,semibold}]
+  \definefontsynonym [SerifBold] [file:\getvariable{fontsetup}{fontfile}] [features={Farsi,bold}]
+   \definefontsynonym [SerifExtraBold] [file:\getvariable{fontsetup}{fontfile}] [features={Farsi,extrabold}]
+\stoptypescript
+
+% ----- BODY FONT SIZE / WEIGHT MAPPING-----
+\starttypescript [serif] [parastoo]
+  \definebodyfont [default] [rm]
+    [
+      lt=SerifLight     sa \getvariable{fontsetup}{scale},
+      tf=SerifRegular   sa \getvariable{fontsetup}{scale},
+      md=SerifMedium    sa \getvariable{fontsetup}{scale},
+      sb=SerifSemiBold  sa \getvariable{fontsetup}{scale},
+      bf=SerifBold      sa \getvariable{fontsetup}{scale},
+      eb=SerifExtraBold sa \getvariable{fontsetup}{scale},
+    ]
+\stoptypescript
+
+% ----- NAMED TYPEFACE -----
+\starttypescript [parastoo]
+  \definetypeface [parastoo] [rm] [serif] [parastoo] [default] [fallbacks=myfallback]
+\stoptypescript
+
+% ----- APPLY BODY FONT -----
+\setupbodyfont[parastoo]
+
+%========== 2. Other Fonts ==========%
+% Definition of other fonts used in the text:

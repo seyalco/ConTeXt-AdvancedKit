@@ -1,0 +1,108 @@
+% Files found in path .
+% Files found in path colored_symbols
+% Files found in path colored_symbols/Buildings
+% File: circus.pdf
+\definesymbol [Buildings:circus]
+  [{%
+     \scale
+       [width=\getvariable{Buildings:circus}{width}]
+       {%
+         \lower\getvariable{Buildings:circus}{lower}
+           \hbox{%
+             \externalfigure
+               [\getvariable{Buildings:circus}{filename}]
+               [page=1]
+           }%
+       }%
+   }]
+   
+% Files found in path colored_symbols/Faces
+% File: smiling.svg
+\startreusableMPgraphic{Faces:smiling}
+  draw lmt_svg [
+    filename = "\getvariable{Faces:smiling}{filename}"
+  ];
+\stopreusableMPgraphic
+
+\definesymbol [Faces:smiling]
+  [{%
+     \scale
+       [width=\getvariable{Faces:smiling}{width}]
+       {%
+         \lower\getvariable{Faces:smiling}{lower}
+           \hbox{\reuseMPgraphic{Faces:smiling}}%
+       }%
+   }]
+
+% Files found in path colored_symbols/Fruits
+% File: grape.svg
+\startreusableMPgraphic{Fruits:grape}
+  draw lmt_svg [
+    filename = "\getvariable{Fruits:grape}{filename}"
+  ];
+\stopreusableMPgraphic
+
+\definesymbol [Fruits:grape]
+  [{%
+     \scale
+       [width=\getvariable{Fruits:grape}{width}]
+       {%
+         \lower\getvariable{Fruits:grape}{lower}
+           \hbox{\reuseMPgraphic{Fruits:grape}}%
+       }%
+   }]
+
+% Files found in path colored_symbols/Physics
+% File: atom.svg
+\startreusableMPgraphic{Physics:atom}
+  draw lmt_svg [
+    filename = "\getvariable{Physics:atom}{filename}"
+  ];
+\stopreusableMPgraphic
+
+\definesymbol [Physics:atom]
+  [{%
+     \scale
+       [width=\getvariable{Physics:atom}{width}]
+       {%
+         \lower\getvariable{Physics:atom}{lower}
+           \hbox{\reuseMPgraphic{Physics:atom}}%
+       }%
+   }]
+
+% Files found in path uncolored_svg
+% Files found in path uncolored_svg/U_Faces
+% File: smile_square.svg
+\startreusableMPgraphic{U_Faces:smile_square}
+  draw lmt_svg [
+    filename = "\getvariable{U_Faces:smile_square}{filename}"
+  ] withcolor \MPcolor{\getvariable{U_Faces:smile_square}{color}};
+\stopreusableMPgraphic
+
+\definesymbol [U_Faces:smile_square]
+  [{%
+     \scale
+       [width=\getvariable{U_Faces:smile_square}{width}]
+       {%
+         \lower\getvariable{U_Faces:smile_square}{lower}
+           \hbox{\reuseMPgraphic{U_Faces:smile_square}}%
+       }%
+   }]
+
+% Files found in path uncolored_svg/U_Quote
+% File: double_quotes_r.svg
+\startreusableMPgraphic{U_Quote:double_quotes_r}
+  draw lmt_svg [
+    filename = "\getvariable{U_Quote:double_quotes_r}{filename}"
+  ] withcolor \MPcolor{\getvariable{U_Quote:double_quotes_r}{color}};
+\stopreusableMPgraphic
+
+\definesymbol [U_Quote:double_quotes_r]
+  [{%
+     \scale
+       [width=\getvariable{U_Quote:double_quotes_r}{width}]
+       {%
+         \lower\getvariable{U_Quote:double_quotes_r}{lower}
+           \hbox{\reuseMPgraphic{U_Quote:double_quotes_r}}%
+       }%
+   }]

@@ -1,0 +1,17 @@
+%lang en
+
+%TitlePage.ctx
+\setvariables[title][
+  institution={کیت پیشرفته ConTeXt)},
+  majorheading={توسعه قالب ConTeXt},
+  minorheading={کیت پیشرفته برای استفاده کنندگان ConTeXt},
+  title={🚀 قالب پیشرفته 🚀},
+  author={اسم شما},
+  link={لینک پکیج},
+  date={\currentdate},
+]
+
+%Setups.ctx
+%%Horizontal Item
+\setvariable{custom-horizontal-item}{n1}{۱}
+\setvariable{custom-horizontal-item}{n2}{۲}

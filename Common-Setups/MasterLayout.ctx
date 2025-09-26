@@ -1,0 +1,69 @@
+% =========================================================
+% MasterLayout.ctx
+% Global page layout & background styling for ConTeXt projects
+% 
+% Description:
+%   This environment file defines the page geometry, margins,
+%   and background settings.
+% =========================================================
+
+% ---------- Page Geometry Settings  ----------
+
+\setuplayout
+  [width=middle,             % Let ConTeXt calculate text width automatically
+   height=middle,            % Let ConTeXt calculate text height automatically
+   location=doublesided,     % Support different margins for odd/even pages
+   topspace=0.018\paperheight,
+   header=0.018\paperheight,
+   headerdistance=0.04\paperheight,
+   backspace=0.046\paperwidth, % Inner (binding) margin
+   cutspace=0.05\paperwidth,  % Outer margin
+   footer=0.05\paperheight,
+   topskip=0.012\paperheight]  % First baseline distance from top
+
+
+% ---------- Text and Background Setup  ----------
+
+% Background as MetaPost graphic for flexibility
+\startreusableMPgraphic{docbackground}
+    filldraw fullsquare
+        xscaled PaperWidth
+        yscaled PaperHeight
+        withcolor \MPcolor{ColBackground};
+\stopreusableMPgraphic
+
+\definelayer
+  [DocBack]
+  [repeat=yes,
+   width=\paperwidth,
+   height=\paperheight,
+   ]
+
+\setlayer[DocBack]{\reusableMPgraphic{docbackground}}
+
+\setupbackgrounds[page][background=DocBack]
+\setupcolors[textcolor=ColMaintext]
+
+% ---------- Header & Footer Style ----------
+
+\setuppagenumbering[location=none] % disable default numbering
+
+% ----- Header -----
+\setupheader
+  [style=\FontHeader,
+   color=ColHeader,]
+
+\setuplayouttext[header][text]
+  [lefttext={HeadTitle}]
+
+% ----- Footer -----
+\setupfooter
+  [style=\FontFooter,
+   color=ColFooter,]
+
+\setuplayouttext[footer][text]
+[middletext={\pagenumber},
+ righttext={hello}]
+
+% ========================
+% End of master-layout.ctx

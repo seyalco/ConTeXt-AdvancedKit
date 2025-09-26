@@ -1,0 +1,11 @@
+% set dimension variables for A5 paper size
+
+%Setups.ctx
+%%paper size
+\setvariable{paper}{size}{A5}
+
+%%Itemize
+\getvariable{itemize-horizontal}{number-columns}{three}
+
+%%Poem
+\setvariable{poem}{number-columns}{two}

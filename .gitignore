@@ -1,0 +1,14 @@
+# Ignore .log files anywhere
+*.log
+
+# Ignore .tuc files anywhere
+*.tuc
+
+# Ignore .emacs-session folder inside Description/
+.emacs-session
+
+#Ignore Backups folder
+Backups
+
+# Ignore Emacs backup files
+*~

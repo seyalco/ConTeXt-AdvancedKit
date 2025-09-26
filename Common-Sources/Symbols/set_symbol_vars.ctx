@@ -1,0 +1,62 @@
+% Symbols found in colored_symbols/Buildings folder:
+\setvariables
+  [Buildings:circus]
+  [
+    width=1.6ex, 
+    kern=0.2em, 
+    lower=0.15ex, 
+    filename=circus.pdf, 
+  ]
+
+% Symbols found in colored_symbols/Faces folder:
+\setvariables
+  [Faces:smiling]
+  [
+    width=1.6ex, 
+    kern=0.2em, 
+    lower=0.15ex, 
+    filename=smiling.svg, 
+  ]
+
+% Symbols found in colored_symbols/Fruits folder:
+\setvariables
+  [Fruits:grape]
+  [
+    width=1.6ex, 
+    kern=0.2em, 
+    lower=0.15ex, 
+    filename=grape.svg, 
+  ]
+
+% Symbols found in colored_symbols/Physics folder:
+\setvariables
+  [Physics:atom]
+  [
+    width=1.6ex, 
+    kern=0.2em, 
+    lower=0.15ex, 
+    filename=atom.svg, 
+  ]
+
+% Symbols found in uncolored_svg/U_Faces folder:
+\setvariables
+  [U_Faces:smile_square]
+  [
+    color=currentcolor, 
+    width=1.6ex, 
+    kern=0.2em, 
+    lower=0.15ex, 
+    filename=smile_square.svg, 
+  ]
+
+% Symbols found in uncolored_svg/U_Quote folder:
+\setvariables
+  [U_Quote:double_quotes_r]
+  [
+    color=currentcolor, 
+    width=1.6ex, 
+    kern=0.2em, 
+    lower=0.15ex, 
+    filename=double_quotes_r.svg, 
+  ]
+
