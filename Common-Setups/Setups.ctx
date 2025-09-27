@@ -3,10 +3,28 @@
 % Purpose: General template settings
 % =========================================
 
+% ---------- Document Direction ------------
+\setupdirections
+  [
+    bidi=\getvariable{dir:document}{bidi_init},
+    method=\getvariable{dir:document}{bidi_method},
+  ]
+
+\setupalign 
+   [\getvariable{dir:document}{direction}]
+
+\definestartstop[LTR] 
+  [before={\begingroup\lefttoright},after=\endgroup]
+
+\definestartstop[RTL]
+   [before={\begingroup\righttoleft},after=\endgroup]
+
 % ---------- General Settings ------------
 \setuppapersize[\getvariable{paper}{size}]
 \setupinteraction[state=start]
-
+\setupalign[\getvariable{lang:document}{rule_hyphenation}]
+\setupuserpagenumber[numberconversion=\getvariable{lang:document}{page_number}]
+\setupalign[\getvariable{lang:document}{hyphenation}]
 
 % ---------- Paragraph & Line Spacing ----
 \setupwhitespace[halfline]        % Paragraph spacing
@@ -81,7 +99,16 @@
     leftmargin=5mm
   ]
 
-
+% ----------Theorem Environment -----
+\defineenumeration[theorem]
+   [
+    headalign=r2l,
+    alternative=text,
+    text=\getvariable{theorem}{text},
+    numberconversion=persiandecimals,
+    title=yes
+   ]
+    
 % ---------- Dual-Poem Environment -----
 \defineitemgroup[Mypoem]
 \setupitemgroup[Mypoem][1] % Setup for the first level of the itemization

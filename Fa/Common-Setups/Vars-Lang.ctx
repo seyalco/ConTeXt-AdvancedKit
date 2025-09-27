@@ -1,17 +1,31 @@
-%lang en
+%lang Fa
+%در اسم اول هر متغیر حتما از پیشوند lang: استفاده کنید تا در سرتاسر سند بلافاصله مشخص باشد این مربوط به فایل language هست.
 
 %TitlePage.ctx
-\setvariables[title][
-  institution={کیت پیشرفته ConTeXt)},
-  majorheading={توسعه قالب ConTeXt},
-  minorheading={کیت پیشرفته برای استفاده کنندگان ConTeXt},
+\setvariables[lang:title][
+  institution={ConTeXt کیت پیشرفته},
+  majorheading={ConTeXt توسعه قالب},
+  minorheading={ConTeXt کیت پیشرفته برای استفاده کنندگان},
   title={🚀 قالب پیشرفته 🚀},
-  author={اسم شما},
+  author_title={پدیدآورنده},
+  author={اسم شما},  
+  link_title={لینک},
   link={لینک پکیج},
-  date={\currentdate},
+  date={جمعه ۴ مهر ۱۴۰۴},
 ]
 
 %Setups.ctx
+%%Document
+\setvariable{lang:document}{hyphenation}{nothyphenated}
+\setvariable{lang:document}{page_number}{persiandecimals}
+
+
+%%General
+
+%%Theorem
+\setvariable{lang:theorem}{text}{قضیه}
+
 %%Horizontal Item
-\setvariable{custom-horizontal-item}{n1}{۱}
-\setvariable{custom-horizontal-item}{n2}{۲}
+\setvariable{lang:custom-horizontal-item}{n1}{۱}
+\setvariable{lang:custom-horizontal-item}{n2}{۲}
+

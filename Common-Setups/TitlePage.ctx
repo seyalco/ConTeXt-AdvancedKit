@@ -9,7 +9,12 @@
 % ==================================================
 
 %--------------------------------------------------
-% 1. TEXT STYLES (font, weight, spacing)
+% 1. PROJECT INFO (all variables are stored here)
+%--------------------------------------------------
+%Note: This Variables moved to Vars-Lang.ctx file's
+
+%--------------------------------------------------
+% 2. TEXT STYLES (font, weight, spacing)
 %--------------------------------------------------
 \define\InstitutionStyle{\tfb}
 \define\MajorHeadingStyle{\tfa}
@@ -19,9 +24,11 @@
 \define\AuthorNameStyle{\tf}
 \define\DateStyle{\tf}                                                      
 
+%--------------------------------------------------
+% 3. COVER POSITION VARIABLES
+%--------------------------------------------------
+
 % ===========================================================
-% 2. Cover Position Variables
-%
 % X/Y values define the page coordinates (anchor point) for 
 % placing each element.
 %
@@ -42,26 +49,7 @@
 %   Example: If you move an element to the page center, set its
 %   anchor point to "middle" so that symmetry is preserved.
 % ===========================================================
-
-\setvariables
-  [coverpos]
-  [institutionX=0.07\paperwidth,
-   institutionY=0.1\paperheight,
-   institutionL=right,
-   headingsX=0.07\paperwidth,
-   headingsY=0.2\paperheight,
-   headingsL=right,
-   titleX=0.5\paperwidth,
-   titleY=0.5\paperheight,
-   titleL=middle,
-   authorX=0.5\paperwidth,
-   authorY=0.75\paperheight,
-   authorL=middle,
-   dateX=0.9\paperwidth,
-   dateY=0.9\paperheight,
-   dateL=left,
-   ]
-
+%Note: The Variables moved to Dir-[LTR|RTL]-Vars .ctx
 
 %--------------------------------------------------
 % 4. COVER PAGE CONTENT
@@ -74,7 +62,7 @@
     filldraw fullsquare
         xscaled PaperWidth
         yscaled PaperHeight
-        withcolor \MPcolor{ColTitleBackground};
+        withcolor \MPcolor{TitleBackground};
 \stopreusableMPgraphic
 
 \definelayer
@@ -90,11 +78,11 @@
 % ===========================================================
 \definelayer
   [InstitutionLayer]
-  [x=\getvariable{coverpos}{institutionX},
-   y=\getvariable{coverpos}{institutionY}]
+  [x=\getvariable{dir:titleposition}{institutionX},
+   y=\getvariable{dir:titleposition}{institutionY}]
 
 % Set what this layer will contain
-\setlayer[InstitutionLayer][location=\getvariable{coverpos}{institutionL}]
+\setlayer[InstitutionLayer][location=\getvariable{dir:titleposition}{institutionL}]
   {\InstitutionStyle \getvariable{title}{institution}}
 
 % ===========================================================
@@ -102,18 +90,18 @@
 % ===========================================================
 \definelayer
   [HeadingsLayer]
-  [x=\getvariable{coverpos}{headingsX},
-   y=\getvariable{coverpos}{headingsY}]
+  [x=\getvariable{dir:titleposition}{headingsX},
+   y=\getvariable{dir:titleposition}{headingsY}]
 
 \setlayer
   [HeadingsLayer]
-  [location=\getvariable{coverpos}{headingsL}]
+  [location=\getvariable{dir:titleposition}{headingsL}]
   {\MajorHeadingStyle\getvariable{title}{majorheading}}
 
 \setlayer
   [HeadingsLayer]
-  [location=\getvariable{coverpos}{headingsL},
-   y={\getvariable{coverpos}{headingsY} + 0.03\paperheight}]
+  [location=\getvariable{dir:titleposition}{headingsL},
+   y={\getvariable{dir:titleposition}{headingsY} + 0.03\paperheight}]
   {\MinorHeadingStyle\getvariable{title}{minorheading}}
 
 % ===========================================================
@@ -141,12 +129,12 @@
 
 \definelayer
   [TitleLayer]
-  [x=\getvariable{coverpos}{titleX},
-   y=\getvariable{coverpos}{titleY}]
+  [x=\getvariable{dir:titleposition}{titleX},
+   y=\getvariable{dir:titleposition}{titleY}]
 
 \setlayer
   [TitleLayer]
-  [location=\getvariable{coverpos}{titleL}]
+  [location=\getvariable{dir:titleposition}{titleL}]
     {
       \CoverTitleFrame{
         \color[TitleText]{\TitleStyle{\getvariable{title}{title}}}
@@ -158,21 +146,21 @@
 % ===========================================================
 \definelayer
   [AuthorLayer]
-  [x=\getvariable{coverpos}{authorX},
-   y=\getvariable{coverpos}{authorY},
+  [x=\getvariable{dir:titleposition}{authorX},
+   y=\getvariable{dir:titleposition}{authorY},
    ]
 
-\setlayer[AuthorLayer][location=\getvariable{coverpos}{authorL}]
+\setlayer[AuthorLayer][location=\getvariable{dir:titleposition}{authorL}]
   {\startcolumns[n=2,distance=0.5\makeupwidth,balance=no]
      % Left column: Author label + name
      \setupalign[left]
-     {\AuthorLabelStyle Author} \par
+     {\AuthorLabelStyle \getvariable{title}{author_title}} \par
      {\AuthorNameStyle \getvariable{title}{author}}
 
      % Right column: Link label + value
      \column
      \setupalign[right]
-     {\AuthorLabelStyle Link} \par
+     {\AuthorLabelStyle \getvariable{title}{link_title}} \par
      {\AuthorNameStyle \getvariable{title}{link}}
    \stopcolumns}
 
@@ -181,11 +169,11 @@
 % ===========================================================
 \definelayer
   [DateLayer]
-  [x=\getvariable{coverpos}{dateX},
-   y=\getvariable{coverpos}{dateY},
+  [x=\getvariable{dir:titleposition}{dateX},
+   y=\getvariable{dir:titleposition}{dateY},
    ]
 
-\setlayer[DateLayer][location=\getvariable{coverpos}{dateL}]
+\setlayer[DateLayer][location=\getvariable{dir:titleposition}{dateL}]
   {\DateStyle \getvariable{title}{date}}
 
 % ===========================================================

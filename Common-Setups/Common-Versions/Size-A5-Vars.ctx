@@ -1,4 +1,5 @@
 % set dimension variables for A5 paper size
+%در اسم اول هر متغیر حتما از پیشوند size: استفاده کنید تا در سرتاسر سند بلافاصله مشخص باشد این مربوط به فایل size هست.
 
 %Setups.ctx
 %%paper size

@@ -16,7 +16,7 @@ Imagine you need to design a document in both English and Persian, and for each 
    `git clone https://github.com/user/ConTeXt-Advanced-Kit.git`
 
 2. Run path generation  
-   `python Generate-SearchPath.py`
+   `python Generate-LoadPath.py`
 
 3. Build all outputs  
    `python Generate-Outputs.py`
@@ -54,7 +54,7 @@ Our factored architecture sidesteps these challenges entirely. Each main.ctx is,
 
 This project includes two powerful Python scripts to automate the entire build process.
 
-### 1. `Generate-SearchPath.py`: Automatic Path Management
+### 1. `Generate-LoadPath.py`: Automatic Path Management
 
 This script is the magic that makes path-based inheritance work seamlessly.
 

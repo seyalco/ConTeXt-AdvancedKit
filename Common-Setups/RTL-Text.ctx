@@ -9,9 +9,8 @@
 %
 % ACTIONS:
 % 1. Sets the default text alignment to Right-to-Left (`\setupalign`).
-% 2. Enables the global bidirectional algorithm (`bidi=global`), which correctly
-%    handles mixed RTL and LTR (e.g., English) text snippets.
-% 3. Configures page numbers to use Arabic-Indic numerals.
+% 2. Enables the global bidirectional algorithm (`bidi=global,methid=one`), 
+%     which correctly handles mixed RTL and LTR (e.g., English) text snippets.
 %
 % USAGE:
 % Simply `\input` this file in your main setup file (e.g., Setups.ctx)
@@ -19,6 +18,10 @@
 % text direction; font definitions must be configured separately.
 
 % ---------- RTL Text Direction ----------
-\setupalign[r2l,nothyphenated]
-\setupdirections[bidi=global]
-\setupuserpagenumber[numberconversion=arabicdecimals]
+\setupdirections[bidi=global,method=unicode]
+\setupalign[r2l]
+
+%From Wiki:
+%In addition to short LTR text pieces, sometimes one needs an LTR paragraph in a mainly RTL document. Using \righttoleft at the beginning of a paragraph (i.e., in vertical mode) achieves this. This command needs to be placed inside a group to limit its scope. I use the following. 
+\definestartstop[LTR] [before={\begingroup\lefttoright},after=\endgroup]
+%This can be used either as \LTR{some English text} for short pieces (for example, inside an RTL paragraph) or as a start/stop construct to produce LTR paragraphs. 

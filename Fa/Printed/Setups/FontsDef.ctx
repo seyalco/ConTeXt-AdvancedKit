@@ -53,3 +53,7 @@
 
 %========== 2. Other Fonts ==========%
 % Definition of other fonts used in the text:
+%\definefont [FontHeader]    [file:Nahid.ttf*default at 10pt] %It's just an example
+\definefont[FontHeader][\tfa \md]
+\definefont[FontFooter][\tfa \md]
+\definefont[FontImportant][\bf]

@@ -12,6 +12,7 @@
 % ------------------------------------------------------------
 
 % Title Page:
+\definecolor[TitleBackground]    [h=1E2430]
 \definecolor[TitleText]    [h=1E2430]
 \definecolor[TitleStart]   [h=E6C15A]  % Deep warm golden-amber
 \definecolor[TitleEnd]     [h=E67676]  % Coral rose-red, energetic but controlled

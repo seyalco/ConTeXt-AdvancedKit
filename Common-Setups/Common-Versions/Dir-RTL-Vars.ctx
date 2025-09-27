@@ -1,5 +1,34 @@
 % Set direction variables for right-to-left envs.
+%در اسم اول هر متغیر حتما از پیشوند dir: استفاده کنید تا در سرتاسر سند بلافاصله مشخص باشد این مربوط به فایل direction هست.
 
+%TitlePage.ctx
+\setvariables
+  [dir:titleposition]
+  [institutionX=0.93\paperwidth,
+   institutionY=0.1\paperheight,
+   institutionL=left,
+   headingsX=0.93\paperwidth,
+   headingsY=0.2\paperheight,
+   headingsL=left,
+   titleX=0.5\paperwidth,
+   titleY=0.5\paperheight,
+   titleL=middle,
+   authorX=0.5\paperwidth,
+   authorY=0.75\paperheight,
+   authorL=middle,
+   dateX=0.1\paperwidth,
+   dateY=0.9\paperheight,
+   dateL=right,
+   ]
+
+   
+ 
 %Setups.ctx
+%%Document
+\getvariable{dir:document}{bidi_init}
+\getvariable{dir:document}{bidi_method}
+\setvariable{dir:document}{direction}{r2l}
+
+
 %%Itemize
 \setvariable{dir-vars}{itemize}{reverse}
