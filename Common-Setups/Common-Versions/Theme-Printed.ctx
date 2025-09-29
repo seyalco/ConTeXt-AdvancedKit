@@ -11,20 +11,20 @@
 %   across your document.
 % ------------------------------------------------------------
 
-% Title Page:
-\definecolor[TitleBackground]    [h=1E2430]
-\definecolor[TitleText]    [h=1E2430]
-\definecolor[TitleStart]   [h=E6C15A]  % Deep warm golden-amber
-\definecolor[TitleEnd]     [h=E67676]  % Coral rose-red, energetic but controlled
+% ----- TitlePage.ctx -----
+\definecolor[MainTitleText]    [c=0, m=0, y=0, k=0.90] % Almost black - deep for main title text
+\definecolor[MainTitleStart]   [c=0.15, m=0.85, y=0.65, k=0.10] % Luxurious burgundy for gradient start
+\definecolor[MainTitleEnd]     [c=0.05, m=0.35, y=0.80, k=0.15] % Warm classic gold for gradient end
 
-% Main text:
-\definecolor[ColBackground] [h=1E2430]  % Dark with blue-gray tone
-\definecolor[ColMaintext]   [h=F2F5F8]  % Soft near-white (high readability)
-\definecolor[ColHeader]     [h=5AA9D6]  % Muted blue, softer than main text
-\definecolor[ColFooter]     [h=3B5D73]  % Dark blue, matches background/header
-\definecolor[ColImportant]  [h=E6953B]  % Warm golden-orange for highlights
+% ----- MasterLayout.ctx -----
+\definecolor[ColBackground]    [c=0, m=0, y=0, k=0]       % Pure white for paper background
+\definecolor[ColMaintext]      [c=0, m=0, y=0, k=0.85]    % Soft black for main readable text
+\definecolor[ColHeader]        [c=0.72, m=0.22, y=0, k=0.15]   % Luxury royal blue for headers
+\definecolor[ColFooter]        [c=0.72, m=0.22, y=0, k=0.35]   % Darker royal blue for footers
+\definecolor[ColImportant]     [c=0, m=0.70, y=0.85, k=0.05]   % Vibrant vermilion for important highlights
 
-% Setups:
-\definecolor[ColHashtag]  [h=E4153B] 
-\definecolor[ColItemizeHorizontal] [h=E4191B] 
+% ----- Setups.ctx -----
+\definecolor[ColHashtag]       [c=0.55, m=0.15, y=0.85, k=0.10] % Modern jade green for hashtags
+\definecolor[ColItemizeHorizontal] [c=0.75, m=0.25, y=0.30, k=0.10] % Teal gray for horizontal item lists
+
 

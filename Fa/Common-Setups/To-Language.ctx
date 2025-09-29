@@ -1,31 +1,69 @@
 % This file creates aliases for commands defined in 'Setups.ctx'.
-% Use this to define custom or language-specific names for your macros.
+% Use it to define custom or language-specific names for your macros.
 %
 % GUIDELINES:
 %
-% 1. For simple one-to-one aliases, use \let.
-%    The new command will behave exactly like the original.
+% 1. For simple one-to-one aliases, prefer \def instead of \let.
+%    This ensures the alias will always use the latest meaning of the
+%    original command when executed, avoiding context-sensitive issues.
 %
 %    Example:
-%    \let\MyAlias\OriginalCommand
+%    \def\MyAlias{\OriginalCommand}
 %
 % 2. For complex wrappers (e.g., for \start...\stop environments) that
-%    pre-set arguments or add formatting, use \protected\def.
+%    preset arguments or add extra formatting, use \protected\def.
 %
 %    Example:
 %    \protected\def\startMyQuote#1\stopMyQuote%
-%       {\starttextbackground[frame] #1 \stoptextbackground \blank[big]}
+%       {\starttextbackground[frame] #1 \stoptextbackground]}
 %
-
+% Advantages of this alias file:
+% - You can keep all the command aliases you use in your document in one place,
+%   which makes them easy to review. If you need more details about an alias,
+%   check its original definition in 'Setups.ctx' and adjust as necessary.
+% - You only need to learn ConTeXt’s main interface once. You don’t have to
+%   memorize all language-specific interfaces, because you define commands
+%   yourself in the language or naming style you prefer.
+%
+% Note:
+% - Follow standard TeX naming rules for command names:
+%   you cannot use numbers, hyphens, or certain special symbols.
+% - In languages like Persian, where letters connect, you can use a hair space
+%   (zero-width non-joiner) to keep words readable without breaking macro names.
+%
 % --- Your Aliases ---
 
-%%1. Simples:
-\let\هشتگ\Hashtag
 
+%%Document Direction
+\protected\def\شروع‌راست‌چین#1\پایان‌راست‌چین%
+    {\startRTL #1 \stopRTL}
 
-%%2. Complexes:
+\protected\def\شروع‌چپ‌چین#1\پایان‌چپ‌چین%
+    {\startRTL #1 \stopRTL}
+    
+%%Defiined Highlight
+\def\مهم{\Important}
+
+%%Fancy subject
+\def\عنوان‌زیبا{\fancysubject}
+
+%%Hashtag
+\def\هشتگ{\Hashtag}
+
+%%Horizontal Item List
+\protected\def\شروع‌رقم‌افقی#1\پایان‌رقم‌افقی
+   {\startitemgroup[Horizontal] #1 \stopitemgroup}
+\def\رقم{\item}    %نیاز به {} ندارد
+
+%%Theorem
+\protected\def\شروع‌قضیه#1\پایان‌قضیه%
+    {\starttheorem #1 \stoptheorem]}
+
+%%Dual-Poem
 \protected\def\شروع‌شعر#1\پایان‌شعر
-   {\startcolor[colBarjasteh]\startitemgroup[Mypoem]#1\stopitemgroup\stopcolor}
-   
-\protected\def\مصراع#1
-   {\startitem #1\stopitem}
+   {\startitemgroup[Mypoem]#1\stopitemgroup}
+\def\hemistich{\مصراع}
+
+
+%%Other Commons:
+\def\صفحه{\page}

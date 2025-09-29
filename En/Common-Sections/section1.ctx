@@ -1,2 +1,14 @@
 % section1.ctx - placeholder
 
+Here is some other text that written for english version
+
+\startitemgroup[Horizontal]
+\item Build 
+\item Explore 
+\item Create 
+\item Inspire 
+\item Learn 
+\item Share 
+\item Smile 
+\item Grow 
+\stopitemgroup

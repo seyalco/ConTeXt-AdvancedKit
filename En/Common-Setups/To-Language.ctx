@@ -1,0 +1,72 @@
+% This file creates aliases for commands defined in 'Setups.ctx'.
+% Use it to create custom or language-specific names for your macros.
+% This is the ENGLISH TEMPLATE VERSION for developers of other languages.
+%
+% HOW TO USE:
+% 1. Replace "YourAlias" with a word or phrase in your language.
+% 2. Keep the structure of the commands intact.
+% 3. The original functionality is provided by commands defined in 'Setups.ctx'.
+% 4. This file is only a template — commands are commented out for guidance.
+%
+% Guidelines for defining aliases:
+% - Use \def for simple one-to-one command mappings.
+% - Use \protected\def for environments (\start...\stop) or complex macros.
+% - Follow TeX naming rules (no digits, hyphens, or special symbols).
+% - For languages with connected scripts, you can use ZWNJ (zero-width non-joiner)
+%   to improve readability in macro names without breaking them.
+%
+
+% === Document Direction Aliases
+
+% Example: Right-to-Left environment alias
+%\protected\def\startYourAlias#1\stopYourAlias%
+%    {\startRTL #1 \stopRTL}
+
+% Example: Left-to-Right environment alias
+%\protected\def\startYourAlias#1\stopYourAlias%
+%    {\startLTR #1 \stopLTR}
+
+% === Highlight Alias
+
+% Highlights important text
+%\def\YourAlias{\Important}
+
+% === Fancy Subject Alias
+
+% Fancy-styled subject heading
+%\def\YourAlias{\fancysubject}
+
+% ===Hashtag
+
+% Formats text as hashtag style
+%\def\YourAlias{\Hashtag}
+
+% === Horizontal Item List Alias
+
+% Start/stop horizontal item group
+%\protected\def\startYourAlias#1\stopYourAlias%
+%   {\startitemgroup[Horizontal] #1 \stopitemgroup}
+
+% Single item in list
+%\def\YourAlias{\item} 
+
+% === Theorem Alias
+
+% Theorem environment
+%\protected\def\startYourAlias#1\stopYourAlias%
+%    {\starttheorem #1 \stoptheorem}
+
+% === Dual-Poem Alias
+
+% Start/stop custom poem environment
+%\protected\def\startYourAlias#1\stopYourAlias%
+%   {\startitemgroup[Mypoem]#1\stopitemgroup}
+
+% Hemistich (half-line of a poem)
+%\def\YourAlias{\YourOriginal}
+
+% === Common Alias
+
+% Page break
+%\def\YourAlias{\page}
+

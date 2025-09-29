@@ -1,2 +1,35 @@
-در این فایل متغیر های مخصوص اسکرین و printed برای فایل setups تنظیم میشود.
-مثلا برای محیط آیتمایز در اسکرین 
+% Set direction variables for left-to-right envs.
+% In the first name of each variable, always use the prefix dir: so it is immediately clear throughout the document that this belongs to the direction file.
+
+%TitlePage.ctx
+\setvariables
+  [dir:titleposition]
+  [institutionX=0.07\paperwidth,
+   institutionY=0.1\paperheight,
+   institutionL=right,
+   headingsX=0.07\paperwidth,
+   headingsY=0.2\paperheight,
+   headingsL=right,
+   titleX=0.5\paperwidth,
+   titleY=0.5\paperheight,
+   titleL=middle,
+   authorX=0.5\paperwidth,
+   authorY=0.75\paperheight,
+   authorL=middle,
+   dateX=0.9\paperwidth,
+   dateY=0.9\paperheight,
+   dateL=left,
+   ]
+
+%Setups.ctx
+%%Document direction
+\setvariable{dir:document}{bidi_init}{global}
+\setvariable{dir:document}{bidi_method}{one}
+\setvariable{dir:document}{direction}{l2r}
+
+%%Horizontal Item
+\setvariable{dir:itemize}{direction}{normal}
+
+%%Theorem
+\setvariable{dir:theorem}{headalign}{l2r}
+

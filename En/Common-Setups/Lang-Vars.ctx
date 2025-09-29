@@ -1,0 +1,34 @@
+%lang En
+% In the first name of each variable, always use the prefix lang: so it is immediately clear throughout the document that this belongs to the language file.
+
+% TitlePage.ctx
+\setvariables[lang:title][
+  institution={ConTeXt Advanced Kit},
+  majorheading={ConTeXt Template Development},
+  minorheading={ConTeXt Advanced Kit for Users},
+  title={🚀 Advanced Template 🚀},
+  author_title={Author},
+  author={Your Name},  
+  link_title={Link},
+  link={Package Link},
+  date={Friday, September 29, 2025},
+]
+
+% MasterLayout.ctx
+\setvariable{lang:header}{lefttext}{Page Title}
+\setvariable{lang:footer}{righttext}{Hello}
+
+% Setups.ctx
+%% General
+\setvariable{lang:document}{hyphenation}{hyphenated}
+\setvariable{lang:document}{page_number}{arabic}
+\setvariable{lang:document}{language}{en}
+
+%% Horizontal Item
+\setvariable{lang:custom-horizontal-item}{n1}{1}
+\setvariable{lang:custom-horizontal-item}{n2}{2}
+
+%% Theorem
+\setvariable{lang:theorem}{text}{Theorem}
+\setvariable{lang:theorem}{numberconversion}{arabic}
+

@@ -54,7 +54,7 @@
    color=ColHeader,]
 
 \setuplayouttext[header][text]
-  [lefttext={HeadTitle}]
+  [lefttext={\getvariable{lang:header}{lefttext}}]
 
 % ----- Footer -----
 \setupfooter
@@ -63,7 +63,7 @@
 
 \setuplayouttext[footer][text]
 [middletext={\pagenumber},
- righttext={hello}]
+ righttext={\getvariable{lang:footer}{righttext}}]
 
 % ========================
 % End of master-layout.ctx

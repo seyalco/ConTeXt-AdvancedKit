@@ -1,12 +1,13 @@
 % set dimension variables for A5 paper size
-%در اسم اول هر متغیر حتما از پیشوند size: استفاده کنید تا در سرتاسر سند بلافاصله مشخص باشد این مربوط به فایل size هست.
+% For the first part of each variable name, always use the ‘size:’ prefix.
+% This makes it immediately clear throughout the document that the variable belongs to the ‘size’ file/configuration.
 
 %Setups.ctx
 %%paper size
-\setvariable{paper}{size}{A5}
+\setvariable{size:paper}{papersize}{A5}
 
-%%Itemize
-\getvariable{itemize-horizontal}{number-columns}{three}
+%%Horizontal Item
+\setvariable{size:horizontal-itemize}{number-columns}{three}
 
 %%Poem
-\setvariable{poem}{number-columns}{two}
+\setvariable{size:poem}{number-columns}{two}

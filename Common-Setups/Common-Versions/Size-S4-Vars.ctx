@@ -1,27 +1,13 @@
-% ------------------------------------------------------------
-% Theme.ctx - Centralized Color Definitions for ConTeXt (LMTX)
-%
-% Define and manage all project colors in one place to keep
-% styles consistent. Update color values here instead of
-% searching through multiple files or environments.
-%
-% Usage:
-%   \input{Theme.ctx}
-%   Use defined colors (colBackground, colMaintext, colHeader)
-%   across your document.
-% ------------------------------------------------------------
+% set dimension variables for S4 paper size
+% For the first part of each variable name, always use the ‘size:’ prefix.
+% This makes it immediately clear throughout the document that the variable belongs to the ‘size’ file/configuration.
 
-% Title Page:
-\definecolor[TitleText]    [h=1E2430]
-\definecolor[TitleStart]   [h=E6C15A]  % Deep warm golden-amber
-\definecolor[TitleEnd]     [h=E67676]  % Coral rose-red, energetic but controlled
+%Setups.ctx
+%%paper size
+\setvariable{size:paper}{papersize}{S4}
 
-% Main text:
-\definecolor[ColBackground] [h=1E2430]  % Dark with blue-gray tone
-\definecolor[ColMaintext]   [h=F2F5F8]  % Soft near-white (high readability)
-\definecolor[ColHeader]     [h=5AA9D6]  % Muted blue, softer than main text
-\definecolor[ColFooter]     [h=3B5D73]  % Dark blue, matches background/header
-\definecolor[ColImportant]  [h=E6953B]  % Warm golden-orange for highlights
+%%Horizontal Item
+\setvariable{size:horizontal-itemize}{number-columns}{three}
 
-
-
+%%Poem
+\setvariable{size:poem}{number-columns}{two}

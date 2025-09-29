@@ -21,14 +21,15 @@
    dateL=right,
    ]
 
-   
- 
 %Setups.ctx
-%%Document
-\getvariable{dir:document}{bidi_init}
-\getvariable{dir:document}{bidi_method}
+%%Document direction
+\setvariable{dir:document}{bidi_init}{global}
+\setvariable{dir:document}{bidi_method}{one}
 \setvariable{dir:document}{direction}{r2l}
 
 
-%%Itemize
-\setvariable{dir-vars}{itemize}{reverse}
+%%Horizontal Item
+\setvariable{dir:itemize}{direction}{reverse}
+
+%%Theorem
+\setvariable{dir:theorem}{headalign}{r2l}

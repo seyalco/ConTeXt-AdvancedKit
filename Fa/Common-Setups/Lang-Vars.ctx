@@ -14,18 +14,20 @@
   date={جمعه ۴ مهر ۱۴۰۴},
 ]
 
+%MasterLayout.ctx
+\setvariable{lang:header}{lefttext}{عنوان صفحه}
+\setvariable{lang:footer}{righttext}{سلام}
+
 %Setups.ctx
-%%Document
+%%General
 \setvariable{lang:document}{hyphenation}{nothyphenated}
 \setvariable{lang:document}{page_number}{persiandecimals}
-
-
-%%General
-
-%%Theorem
-\setvariable{lang:theorem}{text}{قضیه}
+\setvariable{lang:document}{language}{fa}
 
 %%Horizontal Item
 \setvariable{lang:custom-horizontal-item}{n1}{۱}
 \setvariable{lang:custom-horizontal-item}{n2}{۲}
 
+%%Theorem
+\setvariable{lang:theorem}{text}{قضیه}
+\setvariable{lang:theorem}{numberconversion}{persiandecimals}

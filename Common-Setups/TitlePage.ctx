@@ -62,7 +62,7 @@
     filldraw fullsquare
         xscaled PaperWidth
         yscaled PaperHeight
-        withcolor \MPcolor{TitleBackground};
+        withcolor \MPcolor{ColBackground};
 \stopreusableMPgraphic
 
 \definelayer
@@ -83,7 +83,7 @@
 
 % Set what this layer will contain
 \setlayer[InstitutionLayer][location=\getvariable{dir:titleposition}{institutionL}]
-  {\InstitutionStyle \getvariable{title}{institution}}
+  {\InstitutionStyle \getvariable{lang:title}{institution}}
 
 % ===========================================================
 % LAYER: Major & Minor headings
@@ -96,13 +96,13 @@
 \setlayer
   [HeadingsLayer]
   [location=\getvariable{dir:titleposition}{headingsL}]
-  {\MajorHeadingStyle\getvariable{title}{majorheading}}
+  {\MajorHeadingStyle\getvariable{lang:title}{majorheading}}
 
 \setlayer
   [HeadingsLayer]
   [location=\getvariable{dir:titleposition}{headingsL},
-   y={\getvariable{dir:titleposition}{headingsY} + 0.03\paperheight}]
-  {\MinorHeadingStyle\getvariable{title}{minorheading}}
+   y={\getvariable{dir:titleposition}{headingsY} + \lineheight}]
+  {\MinorHeadingStyle\getvariable{lang:title}{minorheading}}
 
 % ===========================================================
 % LAYER: Main title inside frame
@@ -115,7 +115,7 @@
            yscaled OverlayHeight,
     direction = "right",
     alternative = "linear",
-    colors = { "TitleStart", "TitleEnd" }
+    colors = { "MainTitleStart", "MainTitleEnd" }
   ] ;
 \stopreusableMPgraphic
 
@@ -137,7 +137,7 @@
   [location=\getvariable{dir:titleposition}{titleL}]
     {
       \CoverTitleFrame{
-        \color[TitleText]{\TitleStyle{\getvariable{title}{title}}}
+        \color[MainTitleText]{\TitleStyle{\getvariable{lang:title}{title}}}
       }
     }
 
@@ -154,14 +154,14 @@
   {\startcolumns[n=2,distance=0.5\makeupwidth,balance=no]
      % Left column: Author label + name
      \setupalign[left]
-     {\AuthorLabelStyle \getvariable{title}{author_title}} \par
-     {\AuthorNameStyle \getvariable{title}{author}}
+     {\AuthorLabelStyle \getvariable{lang:title}{author_title}} \par
+     {\AuthorNameStyle \getvariable{lang:title}{author}}
 
      % Right column: Link label + value
      \column
      \setupalign[right]
-     {\AuthorLabelStyle \getvariable{title}{link_title}} \par
-     {\AuthorNameStyle \getvariable{title}{link}}
+     {\AuthorLabelStyle \getvariable{lang:title}{link_title}} \par
+     {\AuthorNameStyle \getvariable{lang:title}{link}}
    \stopcolumns}
 
 % ===========================================================
@@ -174,7 +174,7 @@
    ]
 
 \setlayer[DateLayer][location=\getvariable{dir:titleposition}{dateL}]
-  {\DateStyle \getvariable{title}{date}}
+  {\DateStyle \getvariable{lang:title}{date}}
 
 % ===========================================================
 % 5. Final Cover Page

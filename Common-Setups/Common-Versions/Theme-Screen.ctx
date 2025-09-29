@@ -11,17 +11,20 @@
 %   across your document.
 % ------------------------------------------------------------
 
-% Title Page:
-\definecolor[TitleText]    [h=1E2430]
-\definecolor[TitleStart]   [h=E6C15A]  % Deep warm golden-amber
-\definecolor[TitleEnd]     [h=E67676]  % Coral rose-red, energetic but controlled
+% TitlePage.ctx:
+\definecolor[MainTitleText]    [h=1E2430]
+\definecolor[MainTitleStart]   [h=E6C15A]  % Deep warm golden-amber
+\definecolor[MainTitleEnd]     [h=E67676]  % Coral rose-red, energetic but controlled
 
-% Main text:
+% MasterLayout.ctx:
 \definecolor[ColBackground] [h=1E2430]  % Dark with blue-gray tone
 \definecolor[ColMaintext]   [h=F2F5F8]  % Soft near-white (high readability)
 \definecolor[ColHeader]     [h=5AA9D6]  % Muted blue, softer than main text
 \definecolor[ColFooter]     [h=3B5D73]  % Dark blue, matches background/header
 \definecolor[ColImportant]  [h=E6953B]  % Warm golden-orange for highlights
 
+% Setups.ctx:
+\definecolor[ColHashtag]  [h=4A993B] 
+\definecolor[ColItemizeHorizontal] [h=E4191B] 
 
 

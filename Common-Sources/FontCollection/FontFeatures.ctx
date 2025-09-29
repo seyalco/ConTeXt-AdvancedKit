@@ -45,32 +45,27 @@
   ]
 
 % تعریف یک fontfeature استاندارد برای زبان فارسی
-\definefontfeature [Farsi] % پروفایل فونت فارسی
-   [
-     mode=node,         % استفاده از حالت 'node' برای پردازش متن، بهتر برای زبان‌های پیچیده مانند فارسی
-     language=dflt,     % زبان پیش‌فرض؛ انتخاب بدون تغییر اسکریپت تا فونت خودش زبان را تشخیص دهد
-     script=arab,       % اسکریپت عربی (Persian نیز زیرمجموعه همین اسکریپت است)
-     
-     init=yes,          % فعال کردن فرم ابتدایی حروف (Initial forms) 
-     medi=yes,          % فعال کردن فرم میانی حروف (Medial forms) 
-     fina=yes,          % فعال کردن فرم پایانی حروف (Final forms)
-     isol=yes,          % فعال کردن فرم جدا (Isolated forms)؛ ضروری برای حروف تنها
+\definefontfeature [FarsiParstoo]
+  [mode=node,
+   language=dflt,
+   script=arab,
+   init=yes,medi=yes,fina=yes,isol=yes,
+   liga=yes,dlig=yes,rlig=yes,clig=yes,
+   mark=yes,mkmk=yes,
+   curs=yes, % Essential for correct letter connections in Persian.
+   kern=no, % Avoids conflict with 'curs' feature in complex Arabic scripts.
+   ] 
 
-     liga=yes,          % استفاده از Ligatures استاندارد (مثلاً «لا» در فونت‌ها)
-     dlig=yes,          % Ligatures اختیاری و تزئینی (جهت زیبایی بیشتر)
-     rlig=yes,          % Ligatures الزامی تعریف شده در فونت
-     clig=yes,          % Ligatures متنی پیچیده (Contextual ligatures)، مفید برای بهبود اتصال در فونت‌های فارسی
-     tlig=yes,           %  اگر از علامت‌گذاری لاتین یا نیم‌فاصله‌های TeX استفاده کنید، مفید است.
-
-     mark=yes,          % فعال کردن جایگذاری دقیق علائم (مثل اعراب)
-     mkmk=yes,          % جایگذاری دقیق علائم روی علائم دیگر (Mark-to-Mark)؛ برای اعراب ترکیبی و حروف خاص
-
-     kern=yes,          % فعال کردن فاصله‌گذاری جفت‌حروف‌ها (Kerning)
-     curs=yes,           % فعال کردن اتصال حروف در خط عربی و فارسی (Cursive positioning)
-
-     swsh=yes,   % فعال‌کردن حروف تزئینی (Swash)
-     locl=yes    % استفاده از فرم‌های محلی مخصوص فارسی به جای فرم عربی
-   ]
+\definefontfeature [FarsiVazirmatn]
+  [mode=node,
+   language=dflt,
+   script=arab,
+   init=yes,medi=yes,fina=yes,isol=yes,
+   liga=yes,dlig=yes,rlig=yes,clig=yes,
+   mark=yes,mkmk=yes,
+   curs=yes, % Essential for correct letter connections in Persian.
+   kern=no, % Avoids conflict with 'curs' feature in complex Arabic scripts.
+   ] 
 
 
    

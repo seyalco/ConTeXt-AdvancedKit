@@ -13,36 +13,49 @@
 \setupalign 
    [\getvariable{dir:document}{direction}]
 
+% Use these environments for a major block of text whose direction is opposite
+% to the main document's flow (e.g., an English section in a Persian book).
 \definestartstop[LTR] 
   [before={\begingroup\lefttoright},after=\endgroup]
 
 \definestartstop[RTL]
    [before={\begingroup\righttoleft},after=\endgroup]
 
+
 % ---------- General Settings ------------
-\setuppapersize[\getvariable{paper}{size}]
-\setupinteraction[state=start]
-\setupalign[\getvariable{lang:document}{rule_hyphenation}]
-\setupuserpagenumber[numberconversion=\getvariable{lang:document}{page_number}]
-\setupalign[\getvariable{lang:document}{hyphenation}]
+\setupinteraction
+    [state=start]
+
+\setuppapersize
+    [\getvariable{size:paper}{papersize}]
+    
+\setupuserpagenumber
+    [numberconversion=\getvariable{lang:document}{page_number}]
+
+%to change the Hyphenation rules, quotation marks, all that sort of thing, to that of a different language:
+\mainlanguage[\getvariable{lang:document}{language}]
 
 % ---------- Paragraph & Line Spacing ----
-\setupwhitespace[halfline]        % Paragraph spacing
-\setupinterlinespace[line=3.4ex]  % Line spacing
-\setuptolerance[tolerant]
-
+\setupwhitespace          % Paragraph spacing
+    [halfline]        
+    
+\setupinterlinespace      % Line spacing
+    [line=3.4ex]   
+    
+\setuptolerance
+    [tolerant]
+    
 
 % ---------- Defined Highlights ----------
-\definehighlight[Important] [style=FontImportant, color=ColImportant]
+\definehighlight [Important]
+     [style=FontImportant, color=ColImportant]
 
 % ---------- fancy subject ----------
 
-\definehead
-  [fancysubject] 
-  [subject]      
+\definehead [fancysubject] 
+    [subject]      
 
-\setuphead
-  [fancysubject]  
+\setuphead [fancysubject]  
   [
     align=center,  
     style=\bfc,    
@@ -51,77 +64,83 @@
   ]
 
 % ---------- Hashtag ----------
-\def\Hashtag#1{%
-  \color[ColHashtag]{% Apply the specified color
-    \hbox{% Prevent line breaking
-      \ctxlua{%
-        -- Process the input string
-        local original_text = "#1"  -- Original string
-        local formatted_text = string.gsub(original_text, " ", "_")  -- Replace spaces with underscores
-        
-        -- Create a clickable link for PDF search
-        -- The link points to a destination like "search:original_string" for easy searching
-        local display_text = "\\letterhash " .. formatted_text  -- Display text with hash symbol
-        context.goto(display_text, { destination = "search:" .. formatted_text })  -- Output as clickable link
-      }%
-    }%
-  }%
+\startluacode
+interfaces.implement {
+    name      = "Hashtag",   
+    public    = true,   
+    protected = true,  
+    arguments = "string",    -- Expects one string argument
+    actions   = function(str) 
+      str = string.gsub(str," ","_")     -- Replace spaces with underscores
+      context.bgroup()                
+        context.nohyphens()            -- Prevent  breaking in middle
+        context.startcolor({"ColHashtag"})    -- Set text color
+        context.letterhash()              -- Print hashtag symbol
+        context(str)                           -- Print processed string
+        context.stopcolor()               -- End text color
+      context.egroup()                
+    end
 }
-
+\stopluacode
 % Usage example: \Hashtag{your text}
-% This will output: #your_text (clickable, colored, non-breaking, and searchable in PDF)
+% This will output: #your_text
 
 
 % ---------- Horizontal Item List --------
-\defineconversion[custom-horizontal-item]
+\defineconversion [custom-horizontal-item]
   [
-    \getvariable{custom-horizontal-item}{n1},
-    \getvariable{custom-horizontal-item}{n2},
+    \getvariable{lang:custom-horizontal-item}{n1},
+    \getvariable{lang:custom-horizontal-item}{n2},
     {\symbol[U_Faces:smile_square]},
     {\symbol[Fruits:grape]}
   ]
 
-\defineitemgroup[Horizontal]
+\defineitemgroup [Horizontal]
 
-\setupitemgroup
-  [Horizontal] [each]
-  [
+\setupitemgroup [Horizontal]
+  [each]
+  [ 
     custom-horizontal-item,
     packed,
     columns,
-    \getvariable{itemize-horizontal}{number-columns}
+    \getvariable{size:horizontal-itemize}{number-columns},
   ]
   [
     color=ColItemizeHorizontal,
-    command=\Important,
-    direction={\getvariable{dir-vars}{itemize}},
+    command=\Important, %%Importan Highlight that we defined
+    direction={\getvariable{dir:itemize}{direction}},
     stopper=,
-    leftmargin=5mm
+    leftmargin=5mm,
+    before=\blank[2*medium],
+    after=\blank[medium],
   ]
 
 % ----------Theorem Environment -----
 \defineenumeration[theorem]
    [
-    headalign=r2l,
+    headalign=\getvariable{dir:theorem}{headalign},
     alternative=text,
-    text=\getvariable{theorem}{text},
-    numberconversion=persiandecimals,
-    title=yes
+    text=\getvariable{lang:theorem}{text},
+    numberconversion=\getvariable{lang:theorem}{numberconversion},
+    title=yes,
    ]
     
 % ---------- Dual-Poem Environment -----
 \defineitemgroup[Mypoem]
-\setupitemgroup[Mypoem][1] % Setup for the first level of the itemization
+\setupitemgroup[Mypoem]
+  [1] % Setup for the first level of the itemization
   [
     horizontal,
-    \getvariable{poem}{number-columns}, %One, Two or Even numbers
+    \getvariable{size:poem}{number-columns}, %One, Two or Even numbers
   ]
   [
     symbol=,
-    before={\blank[medium]},
-    after={\blank[medium]},
+    before={\blank[medium]\startcolor[ColImportant]},
+    after={\blank[medium]\stopcolor},
   ]
   
+ \protected\def\hemistich#1
+   {\startitem #1\stopitem}
   
 % =========================================
 % END OF FILE

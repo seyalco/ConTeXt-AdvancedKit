@@ -1,84 +1,24 @@
+%Path Loader
 \input{PathList.ctx}
 \input{FontsLoader.ctx}
-% ===========================
-%  تنظیمات فونت متغیر (Variable Font)
-% ===========================
-\setvariables
-  [fontsetup]
-  [
-    fontfile=PTSans-Regular.ttf,
-    light=300,
-    regular=400,
-    medium=500,
-    semibold=600,
-    bold=700,
-    extrabold=800,
-    scale=1
-  ]
 
-% ===========================
-%  تعریف typescript برای فونت Parastoo
-% ===========================
-\starttypescript [serif] [parastoo]
+%Requirements
+\input{FontFeatures.ctx}
+\input{FallbacksDef.ctx}
+\input{FontsDef.ctx}
+\input{Theme-Screen.ctx}
+\input{Lang-Vars.ctx}
+\input{Size-S4-Vars.ctx}
+\input{Dir-RTL-Vars.ctx}
 
-  % --- فونت‌های synonym با وزن‌های مختلف ---
-  \definefontsynonym [SerifLight]
-    [file:\getvariable{fontsetup}{fontfile}]
-    [features={default}, axis={wght=\getvariable{fontsetup}{light}}]
+%Setups
+\input{SymbolMap.ctx}
+\input{Setups.ctx}
+\input{MasterLayout.ctx}
+\input{To-Language.ctx}
 
-  \definefontsynonym [SerifRegular]
-    [file:\getvariable{fontsetup}{fontfile}]
-    [features={default}, axis={wght=\getvariable{fontsetup}{regular}}]
-
-  \definefontsynonym [SerifMedium]
-    [file:\getvariable{fontsetup}{fontfile}]
-    [features={default}, axis={wght=\getvariable{fontsetup}{medium}}]
-
-  \definefontsynonym [SerifSemiBold]
-    [file:\getvariable{fontsetup}{fontfile}]
-    [features={default}, axis={wght=\getvariable{fontsetup}{semibold}}]
-
-  \definefontsynonym [SerifBold]
-    [file:\getvariable{fontsetup}{fontfile}]
-    [features={default}, axis={wght=\getvariable{fontsetup}{bold}}]
-
-  \definefontsynonym [SerifExtraBold]
-    [file:\getvariable{fontsetup}{fontfile}]
-    [features={default}, axis={wght=\getvariable{fontsetup}{extrabold}}]
-
-  % --- نقشه وزن‌ها برای متن اصلی ---
-  \definebodyfont [default] [rm]
-    [
-      lt=SerifLight     sa \getvariable{fontsetup}{scale},
-      tf=SerifRegular   sa 1,
-      md=SerifMedium    sa \getvariable{fontsetup}{scale},
-      sb=SerifSemiBold  sa \getvariable{fontsetup}{scale},
-      bf=SerifBold      sa \getvariable{fontsetup}{scale},
-      eb=SerifExtraBold sa \getvariable{fontsetup}{scale},
-    ]
-
-  % --- نسخه Italic (فعلاً fallback به Regular) ---
-  \definebodyfont [default] [it]
-    [
-      tf=SerifRegular sa \getvariable{fontsetup}{scale},
-    ]
-
-\stoptypescript
-
-% ===========================
-%  تعریف typeface و فعال‌سازی
-% ===========================
-\starttypescript [parastoo]
-  \definetypeface [parastoo] [rm] [serif] [parastoo] [default]
-\stoptypescript
-
-\setupbodyfont[parastoo]
-
-% ===========================
-%  نمونه استفاده
-% ===========================
+%Text
 \starttext
-sghl
-سلام
+\input{TitlePage.ctx}
+\input{ContentLayout.ctx}
 \stoptext
-

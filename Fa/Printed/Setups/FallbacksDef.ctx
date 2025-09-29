@@ -19,14 +19,26 @@
   [myfallback]
   [file:Twemoji.Mozilla.ttf*EmojiUse]
   [
-    0x1F300-0x1F5FF, % Misc Symbols and Pictographs
+    % Basic Symbols & Dingbats (Crucial for ♥️, ❤️, ⚠️, ✅, etc.)
+    0x2600-0x26FF,  % Miscellaneous Symbols
+    0x2700-0x27BF,  % Dingbats
+
+    % Core Emoji Blocks
+    0x1F300-0x1F5FF, % Miscellaneous Symbols and Pictographs
     0x1F600-0x1F64F, % Emoticons
-    0x1F680-0x1F6FF, % Transport & Map
-    0x1F700-0x1F77F, % Alchemical Symbols
-    0x1F780-0x1F7FF, % Geometric Shapes Extended
-    0x1F800-0x1F8FF, % Supplemental Arrows-C
-    0x1F900-0x1F9FF, % Supplemental Symbols & Pictographs
-    0x1FA00-0x1FAFF, % Symbols & Pictographs Extended
+    0x1F680-0x1F6FF, % Transport and Map Symbols
+    
+    % Newer & Extended Emoji Blocks
+    0x1F900-0x1F9FF, % Supplemental Symbols and Pictographs
+    0x1FA70-0x1FAFF, % Symbols and Pictographs Extended-A
+
+    % Variation Selectors (Essential for choosing emoji vs. text presentation)
+    0xFE00-0xFE0F,  % Variation Selectors
+
+    % Other useful ranges for symbols often rendered as emoji
+    0x2100-0x214F,  % Letterlike Symbols (for ™, ℠)
+    0x2B00-0x2BFF,  % Miscellaneous Symbols and Arrows
+    0x3200-0x32FF   % Enclosed CJK Letters and Months (for ©, ®)
   ]
   [force=no, check=no, rscale=0.8]
 

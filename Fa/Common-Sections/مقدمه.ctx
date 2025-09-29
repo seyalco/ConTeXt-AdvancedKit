@@ -1,24 +1,14 @@
 % preface.ctx - placeholder
+\عنوان‌زیبا{پیش‌گفتار 📖🚀}
 
-\fancysubject{Preface 📖🚀}
+سلام دوست عزیز! 👋
 
-Hello dear friend! 👋
+این یک پیش‌گفتار کوتاه و نمونه برای آزمودن قالب \ConTeXt\ 📦 است.
+در این پروژه، ما از فونت‌های اموجی مانند 😀😍🌍 استفاده کرده‌ایم تا متن، جذاب‌تر و از نظر بصری سرگرم‌کننده‌تر شود.
+امیدواریم کار با این \مهم{قالب} برای شما تجربه‌ای لذت‌بخش ✨ و الهام‌بخش 💡 باشد.
 
-This is a short sample preface for testing the \ConTeXt\ 📦 template.  
-In this project, we use emoji fonts like 😀😍🌍 to make the text more fun and visually engaging.  
-We hope this \Important{template} will be an enjoyable ✨ and inspiring 💡 experience for you.
+با آرزوی موفقیت برای شما 🌟\\
+تیم توسعه‌دهنده ❤️
 
-Wishing you success 🌟  
-The Development Team ❤️
-
-\startitemgroup[Horizontal]
-\item Build 
-\item Explore 
-\item Create 
-\item Inspire 
-\item Learn 
-\item Share 
-\item Smile 
-\item Grow 
-\stopitemgroup
+\صفحه
 

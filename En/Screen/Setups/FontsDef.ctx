@@ -1,0 +1,63 @@
+% ======================================
+% This file contains:
+% 1. Main font definition
+% 2. Additional fonts used throughout the document
+% ======================================
+
+%========== 1. Main Font Definition  ==========%
+% ----- GLOBAL FONT SETTINGS  -----
+\setvariables
+  [fontsetup]
+  [fontfile=m-AlanSans-VariableFont_wght.ttf,
+    scale=0.95]
+  
+\definefontfeature [light]      [axis={wght=300}]
+\definefontfeature [regular]    [axis={wght=400}]
+\definefontfeature [medium]     [axis={wght=500}]
+\definefontfeature [semibold]   [axis={wght=600}]
+\definefontfeature [bold]       [axis={wght=700}]
+\definefontfeature [extrabold]  [axis={wght=800}]
+\definefontfeature [black]      [axis={wght=900}]
+
+% ----- TYPEFACE DEFINE  -----
+\starttypescript [sans] [alansans]
+  \setups[fallbackfonts] % Load fallback definitions
+  
+  \definefontsynonym [SansLight]     [file:\getvariable{fontsetup}{fontfile}] [features={default,light}]
+  \definefontsynonym [SansRegular]   [file:\getvariable{fontsetup}{fontfile}] [features={default,regular}]
+  \definefontsynonym [SansMedium]    [file:\getvariable{fontsetup}{fontfile}] [features={default,medium}]
+  \definefontsynonym [SansSemiBold]  [file:\getvariable{fontsetup}{fontfile}] [features={default,semibold}]
+  \definefontsynonym [SansBold]      [file:\getvariable{fontsetup}{fontfile}] [features={default,bold}]
+  \definefontsynonym [SansExtraBold] [file:\getvariable{fontsetup}{fontfile}] [features={default,extrabold}]
+  \definefontsynonym [SansBlack]     [file:\getvariable{fontsetup}{fontfile}] [features={default,black}]
+\stoptypescript
+
+% ----- BODY FONT SIZE / WEIGHT MAPPING-----
+\starttypescript [sans] [alansans]
+  \definebodyfont [default] [ss]
+    [
+      lf=SansLight     sa \getvariable{fontsetup}{scale},
+      tf=SansRegular   sa \getvariable{fontsetup}{scale},
+      md=SansMedium    sa \getvariable{fontsetup}{scale},
+     % sb=SansSemiBold  sa \getvariable{fontsetup}{scale},
+      bf=SansSemiBold      sa \getvariable{fontsetup}{scale},
+      eb=SansExtraBold sa \getvariable{fontsetup}{scale},
+      bl=SansBlack     sa \getvariable{fontsetup}{scale},
+    ]
+\stoptypescript
+
+% ----- NAMED TYPEFACE -----
+\starttypescript [alansans]
+  \definetypeface [alansans] [ss] [sans] [alansans] [default] [fallbacks=myfallback]
+\stoptypescript
+
+% ----- APPLY BODY FONT -----
+\setupbodyfont[alansans]
+
+%========== 2. Other Fonts ==========%
+% Definition of other fonts used in the text:
+%\definefont [FontHeader]    [file:Nahid.ttf*default at 10pt] %It's just an example
+\definefont[FontHeader][SansMedium sa 0.7]
+\definefont[FontFooter][SansRegular sa 1]
+\definefont[FontImportant][SansMedium sa 1]
+

@@ -7,8 +7,8 @@
 \input{FallbacksDef.ctx}
 \input{FontsDef.ctx}
 \input{Theme-Printed.ctx}
-\input{Vars-Lang.ctx}
-\input{Vars-A5-Size.ctx}
+\input{Lang-Vars.ctx}
+\input{Size-A5-Vars.ctx}
 \input{Dir-RTL-Vars.ctx}
 
 %Setups
@@ -20,5 +20,5 @@
 %Text
 \starttext
 \input{TitlePage.ctx}
-\input{ساختار-سند.ctx}
+\input{ContentLayout.ctx}
 \stoptext
