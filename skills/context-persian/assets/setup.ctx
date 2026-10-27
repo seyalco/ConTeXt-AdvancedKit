@@ -1,0 +1,30 @@
+% Persian template derived from ConTeXt-AdvancedKit.
+% Select a Persian font such as Vazirmatn; upload an emoji font for color fallback.
+\definefontfeature[FarsiVazirmatn]
+  [mode=node,language=dflt,script=arab,
+   init=yes,medi=yes,fina=yes,isol=yes,
+   liga=yes,dlig=yes,rlig=yes,clig=yes,
+   mark=yes,mkmk=yes,curs=yes,kern=no]
+\definefontfeature[labregular][axis={wght=400}]
+\definefontfeature[labbold][axis={wght=700}]
+
+\definefontfeature[EmojiUse][default][ccmp=yes,colr=yes,svg=yes,sbix=yes]
+\definefontfallback[labemoji][file:emojifont.ttf*EmojiUse]
+  [0x2600-0x26FF,0x2700-0x27BF,0x1F300-0x1F5FF,0x1F600-0x1F64F,0x1F680-0x1F6FF,0x1F900-0x1F9FF,0x1FA70-0x1FAFF,0xFE00-0xFE0F,0x2100-0x214F,0x2B00-0x2BFF,0x3200-0x32FF]
+  [force=no,check=no,rscale=0.8]
+
+\starttypescript[serif][labpersian]
+  \definefontsynonym[LabRegular][file:mainfont.ttf][features={FarsiVazirmatn,labregular}]
+  \definefontsynonym[LabBold][file:mainfont.ttf][features={FarsiVazirmatn,labbold}]
+  \definebodyfont[default][rm][tf=LabRegular,bf=LabBold,it=LabRegular,bi=LabBold]
+\stoptypescript
+\definetypeface[labpersian][rm][serif][labpersian][default][fallbacks=labemoji]
+\setupbodyfont[labpersian,12pt]
+\setuppapersize[A5]
+\mainlanguage[fa]
+\setupdirections[bidi=global,method=one]
+\setupalign[r2l]
+\setupwhitespace[halfline]
+\setupuserpagenumber[numberconversion=persiandecimals]
+\definestartstop[LTR][before={\begingroup\lefttoright},after=\endgroup]
+\definestartstop[RTL][before={\begingroup\righttoleft},after=\endgroup]

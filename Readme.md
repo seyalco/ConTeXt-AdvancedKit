@@ -116,3 +116,7 @@ For the sake of simplicity, this "Teacher/Student" layer is not included in the 
 
 Even if a `main.ctx` file is incomplete and only contains `\starttext \stoptext`, the `Generate-Outputs.py` script will not fail for it. It will produce a (mostly empty) PDF for that version, allowing you to see the progress of each part of your project in the `Outputs` folder.
 
+
+## AI workflow for Persian and emoji
+
+Read [the Persian ConTeXt skill](skills/context-persian/SKILL.md) for repository-specific guidance on Persian shaping, bidi, variable fonts, emoji fallbacks, resources and portable compilation. It includes a small script to generate a reproducible smoke project without changing the original template outputs.
