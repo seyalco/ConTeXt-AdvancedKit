@@ -1,5 +1,6 @@
 {
   "project": "advanced",
+  "components": ["section", "setups", "sources"],
   "tag_categories": {
     "language": [
       "en",

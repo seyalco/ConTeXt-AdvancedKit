@@ -36,6 +36,14 @@ def load_config(root):
             catalog[tag] = category
     if not TOKEN.fullmatch(config['project']):
         raise ValueError('project must be a simple lowercase identifier')
+    components = config.setdefault('components', ['section', 'setups', 'sources'])
+    if (
+        not isinstance(components, list) or not components
+        or any(not isinstance(name, str) or not TOKEN.fullmatch(name) for name in components)
+        or len(set(components)) != len(components)
+        or any(name in catalog for name in components)
+    ):
+        raise ValueError('components must contain unique folder names distinct from tags')
     for name, tags in config['targets'].items():
         if not re.fullmatch(r'[a-z0-9][a-z0-9_-]*', name):
             raise ValueError(f'Invalid target name: {name}')
@@ -44,27 +52,37 @@ def load_config(root):
 
 
 def logical_path(path, catalog):
-    """Strip registered trailing -tags from each component; inherit conditions (AND)."""
+    """Only tag-only subdirectories add conditions; filenames stay unchanged."""
     parts, tags = [], set()
     for i, part in enumerate(path.parts):
-        suffix = Path(part).suffix if i == len(path.parts)-1 else ''
-        stem = part[:-len(suffix)] if suffix else part
-        tokens = stem.split('-')
-        while len(tokens) > 1 and tokens[-1] in catalog:
-            tags.add(tokens.pop())
-        parts.append('-'.join(tokens) + suffix)
+        tokens = part.split('-')
+        if 0 < i < len(path.parts) - 1 and all(token in catalog for token in tokens):
+            tags.update(tokens)
+        else:
+            parts.append(part)
     validate_tags(sorted(tags), catalog)
     return Path(*parts), frozenset(tags)
 
 
-def resolve(root, active, catalog):
+def resolve(root, active, catalog, components=None):
     validate_tags(active, catalog)
+    if components is None:
+        components = load_config(root)[0]['components']
+    # Do not silently ignore the old sibling-folder layout during migration.
+    for folder in root.iterdir():
+        for component in components:
+            if folder.is_dir() and folder.name.startswith(component + '-'):
+                suffix = folder.name[len(component) + 1:]
+                if all(tag in catalog for tag in suffix.split('-')):
+                    raise ValueError(
+                        f'Move legacy folder {folder.name}/ to {component}/{suffix}/'
+                    )
     candidates = {}
-    for folder in sorted(root.iterdir()):
-        if not folder.is_dir() or folder.is_symlink():
-            continue
-        logical, _ = logical_path(Path(folder.name) / '_', catalog)
-        if logical.parts[0] not in {'section', 'setups', 'sources'}:
+    for component in components:
+        folder = root / component
+        if folder.is_symlink():
+            raise ValueError(f'Symlinks are not supported: {component}')
+        if not folder.is_dir():
             continue
         for source in sorted(folder.rglob('*')):
             relative = source.relative_to(root)
@@ -158,7 +176,7 @@ def run_pass(root, args, previous, prepare_only=False):
     for name, tags in targets:
         current = None
         try:
-            selected = resolve(root, tags, catalog)
+            selected = resolve(root, tags, catalog, config['components'])
             current = (fingerprint(selected), tuple(sorted(tags)), config['project'])
             if args.list:
                 print(name + ': ' + ', '.join(tags))

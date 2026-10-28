@@ -12,7 +12,7 @@ Read the current repository files before editing. Treat this skill as a workflow
 - Read `references/repository-map.md` before changing paths, shared content, output variants, bibliography, figures or symbols.
 - Read `references/typography.md` before changing Persian shaping, bidi, variable weights, font lookup or emoji fallback.
 - Read `references/verification.md` for a reproducible smoke project, MCP packaging and troubleshooting.
-- Read `sources/FontCollection/FontFeatures.ctx`, the selected output's `FontsDef.ctx` and `FallbacksDef.ctx`, and `setups/Direction-fa.ctx` for the live definitions.
+- Read `sources/FontCollection/FontFeatures.ctx`, the selected output's `FontsDef.ctx` and `FallbacksDef.ctx`, and `setups/fa/Direction.ctx` for the live definitions.
 
 ## Preserve these invariants
 

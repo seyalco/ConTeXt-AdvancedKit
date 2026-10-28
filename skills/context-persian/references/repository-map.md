@@ -1,31 +1,52 @@
 # Resources and file layout
 
-Use the root `Readme.md` and `project.json` as the current project contract.
+Use `Readme.md` and `project.json` as the current project contract.
 
 | Location | Responsibility |
 | --- | --- |
 | `main.ctx` | Single shared entry point |
-| `section/` | Shared author content (English sample) |
-| `section-fa/` | Persian overrides with the same logical filenames |
-| `setups/` | Shared and tag-specific typography, cover and layout |
-| `sources/` | Fonts, figures, bibliography and graphical symbols |
+| `section/ContentLayout.ctx` | Shared chapter order |
+| `section/en/`, `section/fa/` | Explicit English and Persian author content |
+| `setups/` | Shared typography, cover and layout files |
+| `setups/en/`, `setups/fa/` | Language-specific direction, labels, aliases and base fonts |
+| `setups/en-printed/`, `setups/fa-printed/` | Language plus print font overrides |
+| `setups/screen/`, `setups/printed/` | Theme-specific colors |
+| `setups/s4/`, `setups/a5/` | Paper sizes |
+| `sources/FontCollection/en/`, `sources/FontCollection/fa/` | Language-specific font families and licenses |
+| `sources/FontCollection/Emoji_font/` | Shared emoji font |
 | `.build/<target>/` | Generated selected tree, PathList.ctx, logs and selection.json |
 | `Outputs/` | Successfully compiled PDFs |
 
+Each component owns its tag subdirectories. Untagged files in the parent are
+shared; English is explicitly `en`, never an implicit shared language. Register
+additional component roots such as `writing` or `template` in `components` in
+`project.json`; the resolver and watcher apply the same rules to them.
+
 Run `python3 Generate-LoadPath.py --target fa-screen` to prepare selected files,
-then compile from `.build/fa-screen/` or use `Generate-Outputs.py` directly.
-Both scripts use `tools/tag_project.py`: registered suffix tags on folders and
-files are inherited as AND conditions; the most specific match wins; equal
-highest ranks fail. Untagged files are Shared fallback. Never add every variant
-to TeX's search path. `--list` prints the effective selection without writing.
-`--watch` rebuilds only outputs whose resolved sources/configuration change.
+then compile inside `.build/fa-screen/` or use `Generate-Outputs.py` directly.
+Only complete subdirectory names consisting of registered tags are conditions:
+`fa`, `a5`, `fa-printed`. Tags are inherited as AND conditions and omitted from
+logical paths. Filenames and ordinary folder names are literal: `intro-fa.ctx`
+is not an override. Most-specific matches win; equal highest ranks fail.
+`setups/fa/printed/FontsDef.ctx` and `setups/fa-printed/FontsDef.ctx` have the same
+condition; do not create both. Legacy sibling roots like `section-fa/` are rejected
+with migration instructions. Never put every variant on TeX's search path.
+
+`--list` prints effective selection without writing. `--watch` rebuilds only
+outputs whose resolved sources/configuration change. The project tests cover
+local tag conditions, explicit language separation, combined conditions,
+custom components and the actual four target selections.
 
 FontsLoader locates the staged root using `Generate-Outputs.py` and searches
-`sources/FontCollection`. Staging supplies that marker. Use exact physical font
-filenames for offline work. The standalone smoke generator uses flat filenames.
+`sources/FontCollection`. Staging supplies that marker and only fonts for the
+selected language. Use exact physical font filenames for offline work. The
+standalone smoke generator reads the physical `fa/Vazirmatn` directory and emits
+flat filenames.
 
 Shared figures are in `sources/Images/`. `diagram1.png` is a text placeholder,
-not a validated image. The smoke generator supplies a real PNG.
+not a validated image. The smoke generator supplies a real PNG. Language-specific
+figures can live in `sources/Images/fa/` or `sources/Images/en/` and inherit the
+same selection rules.
 
 `sources/Symbols/SymbolMap.ctx` imports `set_symbol_vars.ctx` and
 `set_symbol_map.ctx`, and defines `\ms{...}`. The actual scripts are

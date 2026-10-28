@@ -4,12 +4,12 @@
 
 Use the current `sources/FontCollection/FontFeatures.ctx` definitions. `FarsiVazirmatn` and `FarsiParstoo` use `mode=node`, `script=arab`, `language=dflt`, initial/medial/final/isolated forms, ligatures, marks, cursive positioning, and `kern=no`. Do not replace them with a bare `default` feature set and assume Persian shaping will remain correct.
 
-`setups/FontsDef-fa.ctx` selects the variable font `m-Vazirmatn_wght.ttf`, defines weight axes (100–900), associates font synonyms with Persian features and weight features, maps body styles, and selects the typeface. `setups/FontsDef-fa-printed.ctx` uses Parastoo. Do not apply a weight axis to an unrelated static font and promise the requested weight exists.
+`setups/fa/FontsDef.ctx` selects the variable font `m-Vazirmatn_wght.ttf`, defines weight axes (100–900), associates font synonyms with Persian features and weight features, maps body styles, and selects the typeface. `setups/fa-printed/FontsDef.ctx` uses Parastoo. Do not apply a weight axis to an unrelated static font and promise the requested weight exists.
 
 Use `file:<actual-name>` for packaged fonts. The relevant tracked files include:
 
-- `sources/FontCollection/Vazirmatn/m-Vazirmatn_wght.ttf`
-- `sources/FontCollection/Parastoo/m-Parastoo-VariableFont_wght.ttf`
+- `sources/FontCollection/fa/Vazirmatn/m-Vazirmatn_wght.ttf`
+- `sources/FontCollection/fa/Parastoo/m-Parastoo-VariableFont_wght.ttf`
 - `sources/FontCollection/Emoji_font/m-Twemoji.Mozilla.ttf`
 
 Font metadata names, font synonyms and physical filenames are different namespaces. The fallback setup uses the exact tracked filename `m-Twemoji.Mozilla.ttf`; preserve that portable file reference.
