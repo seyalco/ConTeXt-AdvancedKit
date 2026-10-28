@@ -1,16 +1,16 @@
-# فونت‌های پروژه
+# Project fonts
 
-خود `FontCollection/` محل فایل‌ها و تنظیمات مشترک است. فونت‌های مخصوص هر زبان در زیرپوشهٔ تگ همان زبان قرار دارند:
+The parent `FontCollection/` directory holds shared setup files and resources. Language-specific fonts belong under the corresponding tag folder.
 
-| مسیر | کاربرد |
+| Path | Purpose |
 | --- | --- |
-| `FontFeatures.ctx` و `FontsLoader.ctx` | ویژگی‌ها و بارگذاری مشترک فونت |
-| `Emoji_font/` | فونت ایموجی مشترک |
-| `en/Alan_Sans/` و `en/Lora/` | فونت‌های انگلیسی |
-| `fa/Vazirmatn/` و `fa/Parastoo/` | فونت‌های فارسی |
+| `FontFeatures.ctx`, `FontsLoader.ctx` | Shared font features and loader |
+| `Emoji_font/` | Shared emoji font |
+| `en/Alan_Sans/`, `en/Lora/` | English fonts |
+| `fa/Vazirmatn/`, `fa/Parastoo/` | Persian fonts |
 
-اسکریپت پایتون ابتدا فایل‌های منطبق با تگ‌ها را در `.build/<target>/sources/FontCollection/` آماده می‌کند. `FontsLoader.ctx` پوشه‌های همان نسخهٔ منتخب را می‌خواند؛ فونت زبان غیرفعال وارد آن نمی‌شود. فایل‌های مجوز هر خانواده همراه فونت‌ها باقی می‌مانند.
+`build.py` stages only the selected fonts under `.build/<target>/sources/FontCollection/`. `FontsLoader.ctx` finds that prepared root through `project.json` and searches its font directories. Keep each family's license alongside its files.
 
-برای افزودن فونت مشترک، خانوادهٔ آن را در پوشهٔ مادر بگذارید؛ برای فونت فارسی یا انگلیسی، در `fa/` یا `en/` بگذارید. تنظیم استفاده از فونت را در `setups/fa/FontsDef.ctx`، `setups/en/FontsDef.ctx` یا نسخهٔ ترکیبی چاپ آن‌ها انجام دهید.
+Put shared font families in the parent folder and language-specific families in `en/` or `fa/`. Configure their use in the matching `setups/en/FontsDef.ctx`, `setups/fa/FontsDef.ctx`, or print override.
 
-نام فایل فونت باید در خروجی منتخب یکتا باشد. ترجیحاً پیشوند `m-` بگذارید و در تعریف فونت از `file:<actual-filename>` استفاده کنید تا با فونت‌های سیستمی تداخل کمتری داشته باشد. تغییر نام فایل باید در تمام ارجاع‌های آن نیز اعمال شود.
+Font filenames must be unique in a selected output. Prefer an `m-` prefix and `file:<actual-filename>` references to reduce collisions with system fonts. Update all references when renaming a file.

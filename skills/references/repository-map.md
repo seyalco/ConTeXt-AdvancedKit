@@ -1,6 +1,6 @@
 # Resources and file layout
 
-Use `Readme.md` and `project.json` as the current project contract.
+Use `README.md` and `project.json` as the current project contract.
 
 | Location | Responsibility |
 | --- | --- |
@@ -15,15 +15,15 @@ Use `Readme.md` and `project.json` as the current project contract.
 | `sources/FontCollection/en/`, `sources/FontCollection/fa/` | Language-specific font families and licenses |
 | `sources/FontCollection/Emoji_font/` | Shared emoji font |
 | `.build/<target>/` | Generated selected tree, PathList.ctx, logs and selection.json |
-| `Outputs/` | Successfully compiled PDFs |
+| `outputs/` | Successfully compiled PDFs |
 
 Each component owns its tag subdirectories. Untagged files in the parent are
 shared; English is explicitly `en`, never an implicit shared language. Register
 additional component roots such as `writing` or `template` in `components` in
 `project.json`; the resolver and watcher apply the same rules to them.
 
-Run `python3 Generate-LoadPath.py --target fa-screen` to prepare selected files,
-then compile inside `.build/fa-screen/` or use `Generate-Outputs.py` directly.
+Run `python3 build.py --target fa-screen --prepare` to prepare selected files,
+then compile inside `.build/fa-screen/` or use `build.py` directly.
 Only complete subdirectory names consisting of registered tags are conditions:
 `fa`, `a5`, `fa-printed`. Tags are inherited as AND conditions and omitted from
 logical paths. Filenames and ordinary folder names are literal: `intro-fa.ctx`
@@ -37,7 +37,7 @@ outputs whose resolved sources/configuration change. The project tests cover
 local tag conditions, explicit language separation, combined conditions,
 custom components and the actual four target selections.
 
-FontsLoader locates the staged root using `Generate-Outputs.py` and searches
+FontsLoader locates the staged root using `project.json` and searches
 `sources/FontCollection`. Staging supplies that marker and only fonts for the
 selected language. Use exact physical font filenames for offline work. The
 standalone smoke generator reads the physical `fa/Vazirmatn` directory and emits
@@ -57,3 +57,9 @@ renaming diffs because changing asset names can break author references.
 Their presence does not imply a complete citation system. Use ConTeXt publication
 datasets, not BibLaTeX. ConTeXt Lab's reference records/export are separate;
 this refactor does not add an automatic AdvancedKit importer to Lab.
+
+`build.py` contains the interactive menu and all selection/build/watch logic; there
+is no separate tools module. `skills/SKILL.md` holds shared guidance; `skills/en/`
+and `skills/fa/` hold language-specific guidance. These guides are not TeX inputs.
+`tests/` is for developer regression checks. `outputs/.gitkeep` keeps the output
+destination visible; generated PDFs and `.build/` are ignored.

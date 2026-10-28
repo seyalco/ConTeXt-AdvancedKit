@@ -1,6 +1,6 @@
 # AI contributor guidance
 
-For Persian, mixed-direction text, font features, emoji, file layout or portable compilation, read `skills/context-persian/SKILL.md` and its relevant reference files before editing.
+Read `skills/SKILL.md` for shared project and build guidance before editing. For Persian or mixed-direction text read `skills/fa/SKILL.md`; for English typography read `skills/en/SKILL.md`. Read the relevant reference files for the selected task.
 
 Use the current setup and resource files as authoritative. Keep shared typography/layout separate from author content. Compile the selected output, inspect its log and render the PDF before claiming a typesetting fix worked. Do not assume a successful process proves correct glyph shaping or bidi order.
 

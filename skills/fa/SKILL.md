@@ -9,7 +9,7 @@ Read the current repository files before editing. Treat this skill as a workflow
 
 ## Find the right layer
 
-- Read `references/repository-map.md` before changing paths, shared content, output variants, bibliography, figures or symbols.
+- Read `../references/repository-map.md` before changing paths, shared content, output variants, bibliography, figures or symbols.
 - Read `references/typography.md` before changing Persian shaping, bidi, variable weights, font lookup or emoji fallback.
 - Read `references/verification.md` for a reproducible smoke project, MCP packaging and troubleshooting.
 - Read `sources/FontCollection/FontFeatures.ctx`, the selected output's `FontsDef.ctx` and `FallbacksDef.ctx`, and `setups/fa/Direction.ctx` for the live definitions.
@@ -30,7 +30,7 @@ Read the current repository files before editing. Treat this skill as a workflow
 From the repository root:
 
 ```sh
-python3 skills/context-persian/scripts/make_smoke_project.py --out /tmp/context-persian-smoke
+python3 skills/fa/scripts/make_smoke_project.py --out /tmp/context-persian-smoke
 cd /tmp/context-persian-smoke
 context main.tex
 ```

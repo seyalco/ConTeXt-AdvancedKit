@@ -7,7 +7,7 @@
 %
 % Difference from basic version:
 %   - Automatically detects the **project root** by searching parent directories
-%     until a unique file `Generate-Outputs.py` is found.
+%     until a unique file `project.json` is found.
 %   - Works even if `main.ctx` is located in a nested subdirectory of the project.
 %
 % Usage:
@@ -16,7 +16,7 @@
 %       ProjectRoot/
 %           sources/
 %               FontCollection/
-%           Generate-Outputs.py
+%           project.json
 %   - Fonts in `FontCollection` will be loaded automatically by ConTeXt.
 %
 
@@ -29,11 +29,11 @@ local lfs = require("lfs") -- LuaFileSystem for directory handling
 local sep = package.config:sub(1, 1) == "\\" and ";" or ":"
 
 -- Function to find the project root directory by searching
--- upward from the starting directory until 'Generate-Outputs.py' is found.
+-- upward from the starting directory until 'project.json' is found.
 local function find_project_root(start_dir)
     local current_dir = start_dir
     while true do
-        local target_file = current_dir .. "/Generate-Outputs.py"
+        local target_file = current_dir .. "/project.json"
         local attr = lfs.attributes(target_file, "mode")
         if attr == "file" then
             -- Found the file — this is the project root
@@ -54,7 +54,7 @@ local project_dir = find_project_root(start_dir)
 
 -- Error handling if the project root cannot be found
 if not project_dir then
-    texio.write_nl("term", "[ERROR] Could not locate project root containing 'Generate-Outputs.py'")
+    texio.write_nl("term", "[ERROR] Could not locate project root containing 'project.json'")
     return
 end
 

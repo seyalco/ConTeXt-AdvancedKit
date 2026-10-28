@@ -15,6 +15,10 @@ Backups
 
 # Generated snapshots, PDFs and Python caches
 .build/
-Outputs/
+/outputs/*
+!/outputs/.gitkeep
 __pycache__/
 *.pyc
+
+# PDFs left by earlier versions
+/Outputs/

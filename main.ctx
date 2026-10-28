@@ -1,4 +1,4 @@
-% One entry point for all tag selections. Compile through Generate-Outputs.py.
+% One entry point for all tag selections. Compile through build.py.
 \input{PathList.ctx}
 \input{FontsLoader.ctx}
 \input{FontFeatures.ctx}
