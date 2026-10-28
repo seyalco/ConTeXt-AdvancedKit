@@ -1,122 +1,116 @@
-# ConTeXt Advanced Kit
+# ConTeXt AdvancedKit — tag-based projects
 
-A sophisticated project structure for managing complex, multi-lingual, and multi-format typesetting projects with ConTeXt LMTX.
+یک پروژه، یک `main.ctx` و پوشه‌های هم‌سطح. فایل‌ها بدون تگ مشترک‌اند؛ فقط قسمت متفاوت را با تگ بسازید.
 
-> **Note:** This project is the evolutionary successor to the **[ConTeXt-StarterKit](https://github.com/seyalco/ConTeXt-StarterKit)**. While the StarterKit provides an excellent foundation for standard, single-output documents, the Advanced Kit is engineered to manage projects that require multiple outputs (e.g., different languages, layouts, or editions) from a single, unified source. It inherits the core principles of modularity and resource management from its predecessor and elevates them to a new level of power and flexibility.
+## شروع سریع
 
-## Project Goal
+Python 3.10+ و ConTeXt LMTX لازم است. دستورها را می‌توانید از هر مسیری اجرا کنید؛ ریشهٔ پیش‌فرض، محل خود اسکریپت است.
 
-This project provides a robust framework for managing documents that need to be produced in multiple languages and various output sizes (e.g., for print, desktop, and mobile).
-
-Imagine you need to design a document in both English and Persian, and for each language, you require different layouts optimized for printing, desktop viewing, and mobile screens. This kit is designed to handle exactly that scenario, keeping your project organized, maintainable, and free of redundancy.
-
-## Quick Start
-
-1. Clone the repository  
-   `git clone https://github.com/user/ConTeXt-Advanced-Kit.git`
-
-2. Run path generation  
-   `python Generate-LoadPath.py`
-
-3. Build all outputs  
-   `python Generate-Outputs.py`
-
-## Core Concept: Factoring
-
-The architecture of this project might seem complex at first, especially with its nested folder structure. However, it's based on a simple and powerful principle borrowed from mathematics: **factoring**.
-
-Just as you can factor out a common term in a mathematical equation to simplify it, this project structure factors out common files and configurations.
-
-```
-(A * X) + (A * Y)  =>  A * (X + Y)
+```sh
+python3 Generate-Outputs.py --target fa-screen
+python3 Generate-Outputs.py --target fa-printed --watch
+python3 Generate-Outputs.py
 ```
 
-In our project:
-- Files and settings that are shared across different output versions are placed in higher-level "common" directories.
-- As we move deeper into the directory structure, we introduce files specific to that particular version (e.g., a specific language or output size).
-- Finally, we arrive at a unique `main.ctx` file that contains only the code specific to that one final output, inheriting everything else from its parent directories.
+دستور آخر همهٔ خروجی‌های ثبت‌شده در `project.json` را می‌سازد. PDF در `Outputs/advanced-fa-screen.pdf` و گزارش کامپایل در `.build/fa-screen/compile.log` قرار می‌گیرد. خروجی موفق قبلی در صورت شکست کامپایل حفظ می‌شود. برای توقف رصد `Ctrl+C` بزنید.
 
-This approach, which can be described as **Path-based Inheritance** or **Cascading Configuration**, provides several key advantages:
+## ساختار ساده
 
-1.  **No Redundancy**: Common files are never duplicated. You only write them once.
-2.  **Clear Separation**: Each `main.ctx` is compiled in its own isolated environment. There's no risk of file paths or settings from one version interfering with another.
-3.  **Simplified File Naming**: You don't need to create complex filenames like `main-en-print.ctx`. The unique path to each `main.ctx` defines its context, making the project clean and intuitive.
+| مسیر | کاربرد |
+| --- | --- |
+| `main.ctx` | ورودی مشترک همهٔ خروجی‌ها؛ ترتیب بارگذاری قالب و محتوا |
+| `section/` | محتوای مشترک؛ نمونهٔ پیش‌فرض به انگلیسی است |
+| `section-fa/` | فقط محتوای متفاوت برای تگ `fa` |
+| `setups/` | تنظیمات، صفحه‌آرایی، طراحی کاور و نسخه‌های تگ‌دار آنها |
+| `sources/` | فونت‌ها، تصاویر، نمادها و منابع مشترک |
+| `project.json` | دسته‌های تگ و ترکیب تگ‌های هر خروجی |
+| `tools/` | منطق مشترک انتخاب فایل، آماده‌سازی، کامپایل و رصد |
+| `.build/` | نسخهٔ انتخاب‌شده و تولیدشده برای هر خروجی؛ قابل بازسازی |
+| `Outputs/` | PDFهای تولیدشده |
 
-### The Problem with Centralized Architectures
+دیگر به `Fa/Screen/Setups` یا `Fa/Printed/Setups` نیازی نیست. پوشه‌بندی داخلی منابع، مانند دسته‌بندی فونت‌ها، اختیاری و برای نظم منابع است؛ برای ترکیب زبان و اندازه پوشه‌های تو در تو نسازید.
 
-In projects with numerous output variations, a centralized main.ctx often becomes a complex web of conditionals and modes (\doifelse, \setupmodes). While effective for simpler cases, this model’s maintainability diminishes as complexity grows. Debugging a specific output requires reproducing a precise state, and every change carries the risk of unintended side effects on other outputs, demanding extensive testing.
+## قرارداد تگ‌ها
 
-Our factored architecture sidesteps these challenges entirely. Each main.ctx is, by design, an isolated and self-contained compilation unit. To debug any version, you simply compile it directly from its directory. This guarantees a clean, predictable environment every time, making development and maintenance significantly more robust and straightforward.
+تگ‌ها در `project.json` ثبت می‌شوند. زبان، اندازه، تم و هر دستهٔ دلخواه با یک منطق کار می‌کنند. در هر انتخاب فقط یک تگ از هر دسته مجاز است. شناسهٔ تگ شامل حروف کوچک لاتین، عدد و زیرخط است و در کل پروژه یکتا است.
 
----
+| فایل واقعی | نام منطقی در کامپایل | شرط انتخاب |
+| --- | --- | --- |
+| `section/preface.ctx` | `section/preface.ctx` | مشترک؛ بدون شرط |
+| `section-fa/preface.ctx` | `section/preface.ctx` | `fa` |
+| `section/preface-fa.ctx` | `section/preface.ctx` | `fa`؛ روش جایگزین برای یک فایل |
+| `setups/FontsDef-fa-printed.ctx` | `setups/FontsDef.ctx` | `fa` و `printed` هم‌زمان |
+| `sources-fa/Images/map.svg` | `sources/Images/map.svg` | `fa`؛ شامل همهٔ فایل‌های پوشه |
 
-## How It Works: The Python Scripts
+فقط پسوندهای `-tag` ثبت‌شده در انتهای نام فایل یا پوشه تگ محسوب می‌شوند؛ بقیهٔ خط تیره‌ها جزئی از نام عادی هستند. تگ پوشه به فرزندان ارث می‌رسد. تکرار همان تگ اولویت بیشتری ایجاد نمی‌کند.
 
-This project includes two powerful Python scripts to automate the entire build process.
+1. نسخه‌ای مجاز است که **همهٔ** تگ‌های شرط آن فعال باشند (AND).
+2. از میان نسخه‌های مجاز، نسخه با بیشترین تعداد تگ انتخاب می‌شود.
+3. نسخهٔ بدون تگ، fallback مشترک است؛ همراه با نسخهٔ منتخب دوباره بارگذاری نمی‌شود.
+4. اگر دو نسخهٔ دارای بالاترین اولویت برابر منطبق باشند، اسکریپت با نام فایل‌های متعارض خطا می‌دهد. نسخهٔ ترکیبی بسازید یا شرط‌ها را اصلاح کنید.
+5. اگر فایل فقط نسخهٔ تگ‌دار دارد، در خروجی‌های نامنطبق وجود ندارد. برای فایل ضروری fallback مشترک تعریف کنید.
 
-### 1. `Generate-LoadPath.py`: Automatic Path Management
+برای مثال `section-fa/preface.ctx` و `section/preface-fa.ctx` را هم‌زمان نسازید: این دو نسخهٔ هم‌رتبهٔ یک فایل هستند. فایل‌های محتوایی را در `section/ContentLayout.ctx` به ترتیب دلخواه وارد کنید؛ افزودن فایل به پوشه، آن را خودکار به متن کتاب اضافه نمی‌کند.
 
-This script is the magic that makes path-based inheritance work seamlessly.
+در نمونه، فقط متن‌های فارسی در `section-fa` هستند و `ContentLayout.ctx` مشترک مانده است. تنظیمات عمومی هم مشترک‌اند: `Direction-fa.ctx`، `Lang-Vars-fa.ctx` و `FontsDef-fa-printed.ctx` تنها تفاوت‌ها را مشخص می‌کنند. طراحی کاور در `setups/TitlePage.ctx` است.
 
-*   **Primary Goal**: To find all relevant asset directories for each `main.ctx` file and generate a `PathList.ctx` file alongside it.
-*   **Output File**: The `PathList.ctx` contains the necessary ConTeXt commands (`\usepath` and `\setupexternalfigures`) that tell the compiler where to look for files like fonts, images, and other project components.
-*   **Path Discovery Logic**: The script intelligently discovers paths based on three rules:
-    1.  All subdirectories within any `Common-*` folder along the path to the `main.ctx`.
-    2.  All local subdirectories located next to the `main.ctx` file.
-    3.  All parent directories leading up to the project root.
-*   **Overall Function**: The script scans the entire project for `main.ctx` files and automatically creates or updates the corresponding `PathList.ctx` for each one. To use it, simply `\input PathList.ctx` at the beginning of your `main.ctx`.
+## افزودن خروجی یا دستهٔ دلخواه
 
-### 2. `Generate-Outputs.py`: The Build & Automation Tool
+چهار خروجی نمونه `en-screen`، `en-printed`، `fa-screen` و `fa-printed` هستند. `screen` و `printed` تگ تم‌اند؛ `s4` و `a5` تگ اندازه‌اند و مستقل انتخاب می‌شوند.
 
-This script acts as the project's build engine, automating the compilation of all document versions.
+برای افزودن نسخهٔ مدرس، این دسته و خروجی را به JSON موجود اضافه کنید:
 
-Here is a step-by-step breakdown of what it does:
-
-1.  **Cleanup**: It starts by deleting the `Outputs/` directory if it exists and creating a fresh, empty one. This ensures that every build is clean and contains no leftover files from previous compilations.
-2.  **Task Discovery**: It recursively scans the entire project to find every single `main.ctx` file, creating a list of all compilation tasks.
-3.  **High-Speed Parallel Compilation**: This is the script's smartest feature. Instead of compiling files one by one, it uses **multiprocessing**. It detects the number of CPU cores on your machine and runs that many compilation jobs simultaneously. If you have an 8-core CPU, it will compile 8 `main.ctx` files at the same time, dramatically reducing the total build time.
-4.  **Output Management & Organization**:
-    *   For each successfully compiled `main.ctx`, a `main.pdf` is generated.
-    *   The script then renames this PDF to a descriptive name based on its path (e.g., `ccontext-advanced-kit-En-Printed.pdf`), preventing name collisions.
-    *   Finally, it copies all the renamed PDF files into the central `Outputs/` directory.
-
-In short, this script transforms the tedious, manual process of compiling a large, multi-file ConTeXt project into a single, fast, automated command, delivering all final documents neatly organized in one place.
-
----
-
-## Extending the Structure
-
-The power of this factoring approach goes beyond just languages and sizes. You can easily extend it for other variations.
-
-For example, what if you need a **Teacher's Edition** and a **Student's Edition** of a book, where the teacher's version contains answers and extra notes? You could use ConTeXt's conditional commands (`\doif...`) for this.
-
-However, for more significant variations, you can simply add another layer to our directory structure. The project's dimension would change from `2 (languages) * 2 (sizes)` to `2 * 2 * 2 (editions)`.
-
-The directory structure might then look like this:
-
-```
-├── Common-something
-├── Outputs
-├── Generate-Outputs.py
-└── En
-    ├── Common-something
-   └── Printed
-        ├── Common-something
-        ├── Teacher
-        │   └── main.ctx  # Teacher's Edition
-        └── Student
-            └── main.ctx  # Student's Edition
+```json
+{
+  "tag_categories": {"edition": ["teacher", "student"]},
+  "targets": {"fa-teacher": ["fa", "screen", "s4", "teacher"]}
+}
 ```
 
-In this scenario, the `main.ctx` files are moved to the deepest level, where they have the fewest commonalities with other versions.
+این نمونه فقط بخش‌های افزودنی را نشان می‌دهد؛ دسته‌ها و خروجی‌های موجود را حفظ کنید. اکنون `section-teacher/section1.ctx` برای مدرس انتخاب می‌شود؛ اگر نسخهٔ فارسیِ همان فایل هم وجود دارد، نسخهٔ ترکیبی `section-fa-teacher/section1.ctx` را تعریف کنید تا تعارض رفع شود.
 
-For the sake of simplicity, this "Teacher/Student" layer is not included in the base project. However, by following the logic of factoring common elements until you reach the most unique endpoint, you can easily adapt and extend the structure to fit any level of complexity.
+بدون تعریف خروجی نام‌دار نیز می‌توانید ترکیب تگ بدهید:
 
-### A Note on Debugging
+```sh
+python3 Generate-Outputs.py --tags fa,screen,a5
+python3 Generate-LoadPath.py --tags fa,screen,a5
+python3 Generate-Outputs.py --target fa-screen --list
+python3 Generate-Outputs.py --target fa-screen --prepare
+```
 
-Even if a `main.ctx` file is incomplete and only contains `\starttext \stoptext`, the `Generate-Outputs.py` script will not fail for it. It will produce a (mostly empty) PDF for that version, allowing you to see the progress of each part of your project in the `Outputs` folder.
+`Generate-LoadPath.py` همان انتخاب فایل را انجام می‌دهد ولی کامپایل نمی‌کند. مسیرها داخل `.build/<target>/PathList.ctx` تولید می‌شوند. برای کامپایل مستقیم پس از آماده‌سازی، وارد همان پوشه شوید و `context main.ctx` را اجرا کنید؛ فایل ریشه را مستقیماً کامپایل نکنید.
 
+`--list` فقط نگاشت فایل منتخب را نشان می‌دهد. `--target` قابل تکرار است؛ با `--tags` ترکیب نمی‌شود. `--root /path/to/project` برای پروژه‌ای دیگر است.
 
-## AI workflow for Persian and emoji
+## رصد تغییرات
 
-Read [the Persian ConTeXt skill](skills/context-persian/SKILL.md) for repository-specific guidance on Persian shaping, bidi, variable fonts, emoji fallbacks, resources and portable compilation. It includes a small script to generate a reproducible smoke project without changing the original template outputs.
+`--watch` محتوا و مسیر فایل‌های منتخب و تنظیمات خروجی را بررسی می‌کند. ویرایش، افزودن، حذف و تغییر نام فایل یا پوشه در چرخهٔ بعدی دیده می‌شود؛ تغییر نسخهٔ غیرفعال، خروجی نامرتبط را دوباره نمی‌سازد. بازهٔ پیش‌فرض نیم‌ثانیه است و با `--interval 1` تغییر می‌کند. پس از خطای کامپایل، اصلاح منبع موجب تلاش مجدد می‌شود.
+
+فقط ریشه‌های `section`، `setups` و `sources` و نسخه‌های تگ‌دار آنها ورودی هستند. فایل‌های خروجی، پوشه‌های مخفی، `Backups` و کش پایتون وارد کامپایل نمی‌شوند. symlink در منابع پشتیبانی نمی‌شود. نام فایل‌های TeX، فونت و تصویر باید در مجموعهٔ منتخب یکتا باشد، چون این قالب آنها را با نام فایل فراخوانی می‌کند؛ برخورد نام با خطا متوقف می‌شود.
+
+## مهاجرت از ساختار قبلی
+
+| مسیر قدیمی | مسیر جدید |
+| --- | --- |
+| `Common-Setups/` | `setups/` |
+| `Common-Setups/Common-Versions/` | فایل‌های مشترک یا تگ‌دار داخل `setups/` |
+| `Common-Sources/` | `sources/` |
+| `En/Common-Sections/` | `section/` (نمونهٔ پیش‌فرض مشترک) |
+| `Fa/Common-Sections/` | `section-fa/` با نام‌های منطقی یکسان |
+| `Fa/Common-Setups/` | `setups/*-fa.ctx` |
+| `Fa/Printed/Setups/FontsDef.ctx` | `setups/FontsDef-fa-printed.ctx` |
+| چهار `main.ctx` و `PathList.ctx` جدا | یک `main.ctx` و مسیرهای تولیدشده در `.build` |
+
+PDFهای نمونهٔ قدیمی حذف شده‌اند؛ با اسکریپت خروجی‌های تازه بسازید. محتوای فارسی، انگلیسی، فونت‌ها، مجوزهای منابع و طراحی‌های قبلی حفظ شده‌اند. `diagram1.png` همچنان placeholder متنی است و برای استفاده به‌عنوان تصویر واقعی باید جایگزین شود.
+
+## آزمون
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+این آزمون‌ها انتخاب تگ، fallback، AND، تعارض، منابع، رصد و حفظ PDF قبلی هنگام شکست کامپایل را بررسی می‌کنند. آزمون واحد جای بررسی بصری PDF برای شکل‌دهی فارسی و ایموجی را نمی‌گیرد.
+
+## مجوز
+
+کد پروژه تحت MIT است؛ مجوز فونت‌ها و سایر منابع مستقل است. مجوزهای همراه آنها را حفظ کنید.

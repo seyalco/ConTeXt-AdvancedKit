@@ -24,7 +24,7 @@ The flat adaptation was checked with ConTeXt `2026.07.29 11:46` through the user
 | `unknown script mtx-context.lua` | Engine installation/tree/resolver setup before document syntax |
 | A figure compiles but has the wrong caption/size | Exported source and template figure setup; do not rewrite unrelated prose |
 
-The tracked `Common-Sources/Images/diagram1.png` is a text placeholder. Do not present it as a validated raster file; use the generator's real PNG specimen or supply a real image.
+The tracked `sources/Images/diagram1.png` is a text placeholder. Do not present it as a validated raster file; use the generator's real PNG specimen or supply a real image.
 
 A zero exit status proves compilation, not visual correctness. A missing-character diagnostic can occur in an otherwise successful run. Avoid matching generic log words like `missing` in capability descriptions as proof of a missing-glyph event; inspect the actual diagnostic.
 

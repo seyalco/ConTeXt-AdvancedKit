@@ -1,42 +1,38 @@
 # Resources and file layout
 
-## Shared versus output-specific files
+Use the root `Readme.md` and `project.json` as the current project contract.
 
 | Location | Responsibility |
 | --- | --- |
-| `Common-Setups/` | Shared layout and behavior |
-| `Common-Setups/Common-Versions/` | Direction, theme and paper-size variants |
-| `Common-Sources/` | Shared fonts, images, bibliography and graphical symbols |
-| `Fa/Common-Sections/` | Persian author content shared by output variants |
-| `En/Common-Sections/` | English author content shared by output variants |
-| `Fa/Screen/`, `Fa/Printed/` | Output entry points and output-specific setup |
-| `En/Screen/`, `En/Printed/` | English output entry points and setup |
-| `Outputs/` | Collected generated PDFs |
+| `main.ctx` | Single shared entry point |
+| `section/` | Shared author content (English sample) |
+| `section-fa/` | Persian overrides with the same logical filenames |
+| `setups/` | Shared and tag-specific typography, cover and layout |
+| `sources/` | Fonts, figures, bibliography and graphical symbols |
+| `.build/<target>/` | Generated selected tree, PathList.ctx, logs and selection.json |
+| `Outputs/` | Successfully compiled PDFs |
 
-Inspect the chosen `main.ctx` before moving imports. The entry point loads paths/fonts, feature/fallback/typeface definitions, language/theme/size/direction variables, shared setup and layout, and then author content. A shared change can affect several output variants: verify the requested variants rather than assuming every output inherits identically.
+Run `python3 Generate-LoadPath.py --target fa-screen` to prepare selected files,
+then compile from `.build/fa-screen/` or use `Generate-Outputs.py` directly.
+Both scripts use `tools/tag_project.py`: registered suffix tags on folders and
+files are inherited as AND conditions; the most specific match wins; equal
+highest ranks fail. Untagged files are Shared fallback. Never add every variant
+to TeX's search path. `--list` prints the effective selection without writing.
+`--watch` rebuilds only outputs whose resolved sources/configuration change.
 
-## Paths
+FontsLoader locates the staged root using `Generate-Outputs.py` and searches
+`sources/FontCollection`. Staging supplies that marker. Use exact physical font
+filenames for offline work. The standalone smoke generator uses flat filenames.
 
-`Generate-LoadPath.py` discovers shared `Common-*` directories, their subdirectories, local output directories, and parent directories; it writes a `PathList.ctx` beside each `main.ctx`. It excludes `Backups`. Generated paths use forward slashes and include `\usepath` plus `\setupexternalfigures` configuration.
+Shared figures are in `sources/Images/`. `diagram1.png` is a text placeholder,
+not a validated image. The smoke generator supplies a real PNG.
 
-`FontsLoader.ctx` locates the project root using `Generate-Outputs.py`, recursively gathers font directories, extends `OSFONTDIR`, and refreshes the resolver when supported. Preserve that root marker when copying a full AdvancedKit project. A reduced MCP specimen should instead use exact flat filenames, as the smoke-project script does.
+`sources/Symbols/SymbolMap.ctx` imports `set_symbol_vars.ctx` and
+`set_symbol_map.ctx`, and defines `\ms{...}`. The actual scripts are
+`tex_safe_renamer.py`, `set_symbol_vars.py` and `set_symbol_map.py`. Inspect
+renaming diffs because changing asset names can break author references.
 
-After adding/moving resources, regenerate paths from the repository root and review the changed files:
-
-```sh
-python3 Generate-LoadPath.py
-```
-
-Compile an individual output from its own directory first. `Generate-Outputs.py` compiles all discovered entry points and recreates `Outputs/`; inspect that behavior and preserve any valuable existing output before requesting a bulk rebuild.
-
-## Images and symbols
-
-Store shared figures in `Common-Sources/Images/`. The inspected `diagram1.png` is a text placeholder, not a real PNG; validate actual resource bytes rather than trusting a file extension. The smoke-project script generates its own valid PNG. Resolve them through the selected output's generated path configuration. Keep captions and author references in content, and reusable figure styling in setup.
-
-`Common-Sources/Symbols/SymbolMap.ctx` imports `set_symbol_vars.ctx` and `set_symbol_map.ctx`, then defines `\ms{...}` for in-text symbol placement. The actual scripts include `tex_safe_renamer.py`, `set_symbol_vars.py` and `set_symbol_map.py`; some prose uses plural or different casing. Check actual tracked filenames before executing a command. Renaming assets can break references, so inspect the script and resulting diff before treating it as a harmless rebuild.
-
-## Bibliography and source resources
-
-At the inspected baseline, `Common-Sources/Bibliography/Bibliography.ctx` and `refs.bib` are placeholders. Their presence is not evidence of a complete citation system. Implement and verify a ConTeXt publication dataset when a task needs formal bibliography styles. Do not import BibLaTeX or citekeys that the current project never defines.
-
-ConTeXt Lab currently keeps per-book reference records and exports inline citations as footnotes. That is a separate initial implementation, not a claim of complete AdvancedKit bibliography integration.
+`sources/Bibliography/Bibliography.ctx` and `refs.bib` remain placeholders.
+Their presence does not imply a complete citation system. Use ConTeXt publication
+datasets, not BibLaTeX. ConTeXt Lab's reference records/export are separate;
+this refactor does not add an automatic AdvancedKit importer to Lab.

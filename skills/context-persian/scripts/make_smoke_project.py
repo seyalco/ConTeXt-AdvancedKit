@@ -9,10 +9,10 @@ import zlib
 
 def make_project(repo: Path, out: Path) -> None:
     source_files = {
-        "mainfont.ttf": repo / "Common-Sources/FontCollection/Vazirmatn/m-Vazirmatn_wght.ttf",
-        "emojifont.ttf": repo / "Common-Sources/FontCollection/Emoji_font/m-Twemoji.Mozilla.ttf",
-        "Vazirmatn-OFL.txt": repo / "Common-Sources/FontCollection/Vazirmatn/OFL.txt",
-        "ASSET-NOTICE.md": repo / "Common-Sources/Readme.md",
+        "mainfont.ttf": repo / "sources/FontCollection/Vazirmatn/m-Vazirmatn_wght.ttf",
+        "emojifont.ttf": repo / "sources/FontCollection/Emoji_font/m-Twemoji.Mozilla.ttf",
+        "Vazirmatn-OFL.txt": repo / "sources/FontCollection/Vazirmatn/OFL.txt",
+        "ASSET-NOTICE.md": repo / "sources/Readme.md",
     }
     setup = Path(__file__).resolve().parents[1] / "assets/setup.ctx"
     for source in [*source_files.values(), setup]:

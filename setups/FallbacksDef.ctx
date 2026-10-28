@@ -17,7 +17,7 @@
 % Example 1 — Emoji fallback:
 \definefontfallback
   [myfallback]
-  [file:Twemoji.Mozilla.ttf*EmojiUse]
+  [file:m-Twemoji.Mozilla.ttf*EmojiUse]
   [
     % Basic Symbols & Dingbats (Crucial for ♥️, ❤️, ⚠️, ✅, etc.)
     0x2600-0x26FF,  % Miscellaneous Symbols

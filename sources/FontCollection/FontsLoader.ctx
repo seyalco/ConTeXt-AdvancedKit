@@ -1,7 +1,7 @@
 % -*- coding: utf-8 -*-
 % Portable Fonts Loader for ConTeXt — GitHub Version
 % --------------------------------------------------
-% This script automatically loads local fonts from the `Common-Sources/FontCollection` 
+% This script automatically loads local fonts from the `sources/FontCollection`
 % directory and all its subdirectories, without requiring them to be installed system-wide.
 % The script is fully portable across Windows, Linux, and macOS.
 %
@@ -14,7 +14,7 @@
 %   - Place this script in your ConTeXt document or in a preloaded environment file.
 %   - Ensure your project contains:
 %       ProjectRoot/
-%           Common-Sources/
+%           sources/
 %               FontCollection/
 %           Generate-Outputs.py
 %   - Fonts in `FontCollection` will be loaded automatically by ConTeXt.
@@ -59,7 +59,7 @@ if not project_dir then
 end
 
 -- Path to the main font directory inside the project
-local main_font_dir = project_dir .. "/Common-Sources/FontCollection"
+local main_font_dir = project_dir .. "/sources/FontCollection"
 
 -- Recursive function to collect all font directories
 local function collect_subdirs(dir, list)

@@ -12,3 +12,9 @@ Backups
 
 # Ignore Emacs backup files
 *~
+
+# Generated snapshots, PDFs and Python caches
+.build/
+Outputs/
+__pycache__/
+*.pyc

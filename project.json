@@ -1,0 +1,39 @@
+{
+  "project": "advanced",
+  "tag_categories": {
+    "language": [
+      "en",
+      "fa"
+    ],
+    "theme": [
+      "screen",
+      "printed"
+    ],
+    "size": [
+      "s4",
+      "a5"
+    ]
+  },
+  "targets": {
+    "en-screen": [
+      "en",
+      "screen",
+      "s4"
+    ],
+    "en-printed": [
+      "en",
+      "printed",
+      "a5"
+    ],
+    "fa-screen": [
+      "fa",
+      "screen",
+      "s4"
+    ],
+    "fa-printed": [
+      "fa",
+      "printed",
+      "a5"
+    ]
+  }
+}

@@ -2,21 +2,21 @@
 
 ## Persian shaping and weights
 
-Use the current `Common-Sources/FontCollection/FontFeatures.ctx` definitions. `FarsiVazirmatn` and `FarsiParstoo` use `mode=node`, `script=arab`, `language=dflt`, initial/medial/final/isolated forms, ligatures, marks, cursive positioning, and `kern=no`. Do not replace them with a bare `default` feature set and assume Persian shaping will remain correct.
+Use the current `sources/FontCollection/FontFeatures.ctx` definitions. `FarsiVazirmatn` and `FarsiParstoo` use `mode=node`, `script=arab`, `language=dflt`, initial/medial/final/isolated forms, ligatures, marks, cursive positioning, and `kern=no`. Do not replace them with a bare `default` feature set and assume Persian shaping will remain correct.
 
-`Fa/Screen/Setups/FontsDef.ctx` selects the variable font `m-Vazirmatn_wght.ttf`, defines weight axes (100–900), associates font synonyms with Persian features and weight features, maps body styles, and selects the typeface. `Fa/Printed/Setups/FontsDef.ctx` uses Parastoo. Do not apply a weight axis to an unrelated static font and promise the requested weight exists.
+`setups/FontsDef-fa.ctx` selects the variable font `m-Vazirmatn_wght.ttf`, defines weight axes (100–900), associates font synonyms with Persian features and weight features, maps body styles, and selects the typeface. `setups/FontsDef-fa-printed.ctx` uses Parastoo. Do not apply a weight axis to an unrelated static font and promise the requested weight exists.
 
 Use `file:<actual-name>` for packaged fonts. The relevant tracked files include:
 
-- `Common-Sources/FontCollection/Vazirmatn/m-Vazirmatn_wght.ttf`
-- `Common-Sources/FontCollection/Parastoo/m-Parastoo-VariableFont_wght.ttf`
-- `Common-Sources/FontCollection/Emoji_font/m-Twemoji.Mozilla.ttf`
+- `sources/FontCollection/Vazirmatn/m-Vazirmatn_wght.ttf`
+- `sources/FontCollection/Parastoo/m-Parastoo-VariableFont_wght.ttf`
+- `sources/FontCollection/Emoji_font/m-Twemoji.Mozilla.ttf`
 
-Font metadata names, font synonyms and physical filenames are different namespaces. The fallback setup currently refers to `Twemoji.Mozilla.ttf`, while the tracked file has an `m-` prefix. Verify resolution before changing a working template; for a flat portable package, reference the copied file's exact name instead of relying on that alias.
+Font metadata names, font synonyms and physical filenames are different namespaces. The fallback setup uses the exact tracked filename `m-Twemoji.Mozilla.ttf`; preserve that portable file reference.
 
 ## Direction is independent of shaping
 
-The live RTL variables select `bidi=global`, `method=one`, and `direction=r2l`. `Common-Setups/Setups.ctx` applies these variables through `\setupdirections` and `\setupalign`. It defines scoped `LTR` and `RTL` environments for blocks with the opposite direction.
+The live RTL variables select `bidi=global`, `method=one`, and `direction=r2l`. `setups/Setups.ctx` applies these variables through `\setupdirections` and `\setupalign`. It defines scoped `LTR` and `RTL` environments for blocks with the opposite direction.
 
 Retain `\mainlanguage[fa]` and the Persian number-conversion settings in the language/setup layer. Preserve Latin text and digits in logical order. Check `ConTeXt Lab`, `۱۲۳۴`, punctuation, parentheses, and mixed-direction captions in the PDF. Use a scoped `\startLTR ... \stopLTR` block when the intended structure is an English block rather than Persian prose containing Latin words.
 
