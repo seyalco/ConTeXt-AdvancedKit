@@ -12,3 +12,13 @@ Backups
 
 # Ignore Emacs backup files
 *~
+
+# Generated snapshots, PDFs and Python caches
+.build/
+/outputs/*
+!/outputs/.gitkeep
+__pycache__/
+*.pyc
+
+# PDFs left by earlier versions
+/Outputs/

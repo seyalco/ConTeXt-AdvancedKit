@@ -1,0 +1,45 @@
+% ==========================================
+% Font Fallback Setup
+% ==========================================
+% This setup defines one or more "fallback fonts".
+% A fallback font is used when your main font does NOT include a given character.
+%
+% You can use this technique to:
+%   - Display characters from a language not covered by your main font
+%   - Use a color emoji font for certain Unicode ranges
+%   - Add special symbol sets or icon ranges
+%   - Force specific ranges to always use a particular font
+%
+% You may define multiple fallbacks for different Unicode ranges.
+% ==========================================
+
+\startsetups [fallbackfonts]
+% Example 1 — Emoji fallback:
+\definefontfallback
+  [myfallback]
+  [file:m-Twemoji.Mozilla.ttf*EmojiUse]
+  [
+    % Basic Symbols & Dingbats (Crucial for ♥️, ❤️, ⚠️, ✅, etc.)
+    0x2600-0x26FF,  % Miscellaneous Symbols
+    0x2700-0x27BF,  % Dingbats
+
+    % Core Emoji Blocks
+    0x1F300-0x1F5FF, % Miscellaneous Symbols and Pictographs
+    0x1F600-0x1F64F, % Emoticons
+    0x1F680-0x1F6FF, % Transport and Map Symbols
+    
+    % Newer & Extended Emoji Blocks
+    0x1F900-0x1F9FF, % Supplemental Symbols and Pictographs
+    0x1FA70-0x1FAFF, % Symbols and Pictographs Extended-A
+
+    % Variation Selectors (Essential for choosing emoji vs. text presentation)
+    0xFE00-0xFE0F,  % Variation Selectors
+
+    % Other useful ranges for symbols often rendered as emoji
+    0x2100-0x214F,  % Letterlike Symbols (for ™, ℠)
+    0x2B00-0x2BFF,  % Miscellaneous Symbols and Arrows
+    0x3200-0x32FF   % Enclosed CJK Letters and Months (for ©, ®)
+  ]
+  [force=no, check=no, rscale=0.8]
+
+\stopsetups

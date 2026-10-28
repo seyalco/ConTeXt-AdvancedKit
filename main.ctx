@@ -1,0 +1,18 @@
+% One entry point for all tag selections. Compile through build.py.
+\input{PathList.ctx}
+\input{FontsLoader.ctx}
+\input{FontFeatures.ctx}
+\input{FallbacksDef.ctx}
+\input{FontsDef.ctx}
+\input{Theme.ctx}
+\input{Lang-Vars.ctx}
+\input{Size.ctx}
+\input{Direction.ctx}
+\input{SymbolMap.ctx}
+\input{Setups.ctx}
+\input{MasterLayout.ctx}
+\input{To-Language.ctx}
+\starttext
+\input{TitlePage.ctx}
+\input{ContentLayout.ctx}
+\stoptext
